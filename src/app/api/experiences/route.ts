@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 // Experience Marketplace API - Experiences CRUD
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';

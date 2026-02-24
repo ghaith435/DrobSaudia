@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { ollamaChat } from '@/lib/ollama';
 import { getNearestAttractions, diriyahAttractions } from '@/data/diriyah';

@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { NextResponse } from 'next/server';
 
 // TTS Proxy - bypasses CORS by fetching audio server-side

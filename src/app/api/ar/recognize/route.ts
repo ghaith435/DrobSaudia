@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from 'next/server';
 
 const AR_SERVICE_URL = process.env.AR_SERVICE_URL || 'http://localhost:5001';

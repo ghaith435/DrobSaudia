@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 // AI TripBuilder API - Generate personalized itineraries
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';

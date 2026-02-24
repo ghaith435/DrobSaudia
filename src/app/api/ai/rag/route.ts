@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { queryRAG, generateEmbedding, RAGDocument } from '@/lib/ollama';
 import { prisma } from '@/lib/prisma';

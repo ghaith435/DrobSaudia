@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { NextRequest } from 'next/server';
 import { withErrorHandler, withRateLimit, authLimiter, apiSuccess, apiError } from '@/lib/security';
 import { contactSchema, validateInput } from '@/lib/validations';

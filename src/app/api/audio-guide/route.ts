@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 /**
  * Enhanced Audio Guide Service
  * خدمة الدليل الصوتي المحسنة

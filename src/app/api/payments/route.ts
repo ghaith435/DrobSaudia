@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { createCheckoutSession, createPaymentIntent, getOrCreateCustomer } from '@/lib/stripe';
 import { withErrorHandler, withRateLimit, apiLimiter, apiSuccess, apiError } from '@/lib/security';

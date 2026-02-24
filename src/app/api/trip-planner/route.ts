@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from "next/server";
 
 // Simulate ChatGPT/Gemini API response for trip planning
