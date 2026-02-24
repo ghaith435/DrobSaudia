@@ -1,0 +1,622 @@
+/* ==================== AR Camera Styles ==================== */
+
+.arContainer {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+    overflow: hidden;
+}
+
+/* Camera Wrapper */
+.cameraWrapper {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 180px);
+    overflow: hidden;
+}
+
+.video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.canvas {
+    display: none;
+}
+
+/* Scan Frame */
+.scanFrame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 280px;
+    height: 280px;
+    pointer-events: none;
+}
+
+.corner {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-color: #00d4ff;
+    border-style: solid;
+    border-width: 0;
+}
+
+.topLeft {
+    top: 0;
+    left: 0;
+    border-top-width: 4px;
+    border-left-width: 4px;
+    border-top-left-radius: 12px;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.topRight {
+    top: 0;
+    right: 0;
+    border-top-width: 4px;
+    border-right-width: 4px;
+    border-top-right-radius: 12px;
+    animation: pulse 2s ease-in-out infinite 0.5s;
+}
+
+.bottomLeft {
+    bottom: 0;
+    left: 0;
+    border-bottom-width: 4px;
+    border-left-width: 4px;
+    border-bottom-left-radius: 12px;
+    animation: pulse 2s ease-in-out infinite 1s;
+}
+
+.bottomRight {
+    bottom: 0;
+    right: 0;
+    border-bottom-width: 4px;
+    border-right-width: 4px;
+    border-bottom-right-radius: 12px;
+    animation: pulse 2s ease-in-out infinite 1.5s;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+    }
+
+    50% {
+        opacity: 0.6;
+        box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+    }
+}
+
+/* Scan Line */
+.scanLine {
+    position: absolute;
+    top: 0;
+    left: 10px;
+    right: 10px;
+    height: 3px;
+    background: linear-gradient(90deg,
+            transparent,
+            #00d4ff 20%,
+            #00ff88 50%,
+            #00d4ff 80%,
+            transparent);
+    box-shadow: 0 0 15px rgba(0, 212, 255, 0.8);
+    animation: scan 1.5s linear infinite;
+}
+
+@keyframes scan {
+    0% {
+        top: 0;
+    }
+
+    100% {
+        top: 100%;
+    }
+}
+
+/* Scanning Overlay */
+.scanningOverlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 24px 40px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.scanningSpinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(0, 212, 255, 0.2);
+    border-top-color: #00d4ff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.scanningOverlay span {
+    color: #00d4ff;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+/* Error Message */
+.errorMessage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255, 59, 48, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 24px 32px;
+    border-radius: 16px;
+    text-align: center;
+    max-width: 300px;
+    box-shadow: 0 10px 40px rgba(255, 59, 48, 0.3);
+}
+
+.errorMessage span {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.errorMessage p {
+    color: white;
+    margin: 0 0 16px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.errorMessage button {
+    background: white;
+    color: #ff3b30;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.errorMessage button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Permission Prompt */
+.permissionPrompt {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, rgba(30, 30, 50, 0.98), rgba(20, 20, 40, 0.98));
+    backdrop-filter: blur(20px);
+    padding: 40px;
+    border-radius: 24px;
+    text-align: center;
+    max-width: 350px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.permissionIcon {
+    font-size: 4rem;
+    margin-bottom: 16px;
+    animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.permissionPrompt h3 {
+    color: white;
+    font-size: 1.4rem;
+    margin: 0 0 12px;
+}
+
+.permissionPrompt p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0 0 24px;
+}
+
+.permissionBtn {
+    background: linear-gradient(135deg, #00d4ff, #00ff88);
+    color: #0a0a0a;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.permissionBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+}
+
+/* Controls */
+.controls {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 24px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent);
+}
+
+.controlBtn {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.controlBtn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.1);
+}
+
+.controlBtn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.scanBtn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #00d4ff, #00ff88);
+    border: none;
+    border-radius: 50px;
+    color: #0a0a0a;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 30px rgba(0, 212, 255, 0.4);
+}
+
+.scanBtn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0, 212, 255, 0.5);
+}
+
+.scanBtn:disabled {
+    background: linear-gradient(135deg, #666, #888);
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.btnSpinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-top-color: #0a0a0a;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* Result Card */
+.resultCard {
+    position: fixed;
+    bottom: 100px;
+    left: 16px;
+    right: 16px;
+    background: linear-gradient(135deg, rgba(30, 30, 50, 0.98), rgba(20, 20, 40, 0.98));
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 24px;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: slideUp 0.4s ease-out;
+    z-index: 100;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.closeBtn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.closeBtn:hover {
+    background: rgba(255, 59, 48, 0.8);
+}
+
+.resultHeader {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.categoryIcon {
+    font-size: 2.5rem;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 212, 255, 0.1);
+    border-radius: 16px;
+}
+
+.placeInfo {
+    flex: 1;
+}
+
+.placeInfo h2 {
+    color: white;
+    font-size: 1.4rem;
+    margin: 0 0 4px;
+    line-height: 1.3;
+}
+
+.category {
+    color: rgba(0, 212, 255, 0.8);
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.confidenceBadge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 255, 136, 0.2));
+    padding: 12px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+.confidenceValue {
+    color: #00ff88;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.confidenceLabel {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.description {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0 0 20px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.actionBtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    border: none;
+}
+
+.primaryAction {
+    background: linear-gradient(135deg, #00d4ff, #00ff88);
+    color: #0a0a0a;
+}
+
+.primaryAction:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+}
+
+.secondaryAction {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.secondaryAction:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.matchInfo {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.matchInfo span {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.8rem;
+}
+
+/* History Panel */
+.historyPanel {
+    position: fixed;
+    bottom: 100px;
+    left: 16px;
+    right: 16px;
+    background: rgba(20, 20, 40, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.historyPanel h4 {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 12px;
+}
+
+.historyList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.historyItem {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.historyItem:hover {
+    background: rgba(0, 212, 255, 0.1);
+}
+
+.historyIcon {
+    font-size: 1.3rem;
+}
+
+.historyName {
+    flex: 1;
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.historyConfidence {
+    color: #00ff88;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Instructions */
+.instructions {
+    position: fixed;
+    top: 100px;
+    left: 16px;
+    right: 16px;
+    text-align: center;
+}
+
+.instructions p {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    padding: 12px 24px;
+    border-radius: 30px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .scanFrame {
+        width: 220px;
+        height: 220px;
+    }
+
+    .resultCard {
+        padding: 20px;
+        bottom: 90px;
+    }
+
+    .resultHeader {
+        flex-wrap: wrap;
+    }
+
+    .placeInfo h2 {
+        font-size: 1.2rem;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    .actionBtn {
+        justify-content: center;
+    }
+}

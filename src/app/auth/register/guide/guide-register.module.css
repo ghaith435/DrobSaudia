@@ -1,0 +1,831 @@
+/* Guide Registration Page */
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-deep);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.bgDecor {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 20% 20%, rgba(217, 176, 99, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(217, 176, 99, 0.06) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.bgOrb1 {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(217, 176, 99, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(60px);
+    animation: float 8s ease-in-out infinite;
+}
+
+.bgOrb2 {
+    position: absolute;
+    bottom: 10%;
+    right: 5%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(40px);
+    animation: float 10s ease-in-out infinite reverse;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.wrapper {
+    display: flex;
+    gap: 3rem;
+    max-width: 1300px;
+    width: 100%;
+    z-index: 1;
+}
+
+/* Benefits Section */
+.benefitsSection {
+    flex: 0.8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.benefitsTitle {
+    font-size: 2rem;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--text-primary) 30%, var(--accent-gold) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.benefitsSubtitle {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.benefitsList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.benefitsList li {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    padding: 1rem 1.25rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.benefitsList li:hover {
+    border-color: rgba(217, 176, 99, 0.3);
+    transform: translateX(10px);
+}
+
+[dir="rtl"] .benefitsList li:hover {
+    transform: translateX(-10px);
+}
+
+.illustration {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.bigEmoji {
+    font-size: 5rem;
+    animation: float 4s ease-in-out infinite;
+}
+
+/* Card */
+.card {
+    flex: 1.5;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 1.5rem;
+    padding: 2.5rem;
+    position: relative;
+    animation: fadeInUp 0.6s ease-out;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.card::-webkit-scrollbar {
+    width: 6px;
+}
+
+.card::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.card::-webkit-scrollbar-thumb {
+    background: rgba(217, 176, 99, 0.3);
+    border-radius: 3px;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.langToggle {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+[dir="rtl"] .langToggle {
+    right: auto;
+    left: 1.25rem;
+}
+
+.langToggle:hover {
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.logo {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--text-primary);
+}
+
+.logoGold {
+    color: var(--accent-gold);
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, rgba(217, 176, 99, 0.2), rgba(217, 176, 99, 0.05));
+    border: 1px solid rgba(217, 176, 99, 0.3);
+    padding: 0.4rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    color: var(--accent-gold);
+    margin-top: 0.75rem;
+}
+
+.welcome {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-top: 0.75rem;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+/* Steps Progress */
+.stepsProgress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-bottom: 2rem;
+    padding: 0 1rem;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.stepNumber {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 700;
+    border: 2px solid var(--glass-border);
+    background: transparent;
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+.stepLabel {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.stepConnector {
+    width: 40px;
+    height: 2px;
+    background: var(--glass-border);
+    margin: 0 0.5rem;
+    border-radius: 1px;
+    transition: all 0.3s ease;
+}
+
+.step.active .stepNumber {
+    background: linear-gradient(135deg, var(--accent-gold), #e6c377);
+    color: var(--text-primary);
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 15px rgba(217, 176, 99, 0.3);
+}
+
+.step.active .stepLabel {
+    color: var(--accent-gold);
+}
+
+.step.completed .stepNumber {
+    background: rgba(34, 197, 94, 0.2);
+    border-color: #22c55e;
+    color: #22c55e;
+}
+
+.step.completed .stepLabel {
+    color: #22c55e;
+}
+
+.stepConnector.active {
+    background: linear-gradient(90deg, #22c55e, var(--accent-gold));
+}
+
+/* Form */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.inputRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.inputGroupFull {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    grid-column: 1 / -1;
+}
+
+.inputGroup label,
+.inputGroupFull label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.inputGroup input,
+.inputGroup select,
+.inputGroupFull input,
+.inputGroupFull textarea,
+.inputGroupFull select {
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--glass-border);
+    border-radius: 0.75rem;
+    padding: 0.875rem 1rem;
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.inputGroupFull textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.inputGroup input::placeholder,
+.inputGroupFull input::placeholder,
+.inputGroupFull textarea::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+
+.inputGroup input:focus,
+.inputGroup select:focus,
+.inputGroupFull input:focus,
+.inputGroupFull textarea:focus,
+.inputGroupFull select:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 0 3px rgba(217, 176, 99, 0.1);
+}
+
+.inputGroup select option,
+.inputGroupFull select option {
+    background: var(--bg-surface);
+    color: var(--text-primary);
+}
+
+/* Checkbox */
+.checkboxGroup {
+    margin-top: 0.5rem;
+}
+
+.checkboxLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.checkboxLabel input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--accent-gold);
+    cursor: pointer;
+}
+
+/* Error */
+.error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #f87171;
+    padding: 0.875rem 1rem;
+    border-radius: 0.75rem;
+    font-size: 0.9rem;
+}
+
+/* Success */
+.success {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    color: #4ade80;
+    padding: 0.875rem 1rem;
+    border-radius: 0.75rem;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Section Title */
+.sectionTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sectionDesc {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+/* Tour Cards */
+.tourCards {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.tourCard {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 1.25rem;
+    padding: 1.5rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.tourCard:hover {
+    border-color: rgba(217, 176, 99, 0.2);
+}
+
+.tourCardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.tourCardTitle {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--accent-gold);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.removeTourBtn {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #f87171;
+    padding: 0.4rem 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.removeTourBtn:hover {
+    background: rgba(239, 68, 68, 0.2);
+    border-color: rgba(239, 68, 68, 0.5);
+}
+
+.tourFields {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.tourRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* Image Upload */
+.imageUploadArea {
+    border: 2px dashed var(--glass-border);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.imageUploadArea:hover {
+    border-color: rgba(217, 176, 99, 0.4);
+    background: rgba(217, 176, 99, 0.05);
+}
+
+.imageUploadArea input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.uploadIcon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.uploadText {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.uploadHint {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    opacity: 0.6;
+    margin-top: 0.25rem;
+}
+
+/* Image Previews */
+.imagePreviews {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0.75rem;
+}
+
+.imagePreview {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border: 2px solid var(--glass-border);
+}
+
+.imagePreview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.removeImage {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: white;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    font-size: 0.7rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Languages Chips */
+.languageChips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.languageChip {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 9999px;
+    font-size: 0.8rem;
+    border: 1px solid var(--glass-border);
+    background: rgba(0, 0, 0, 0.03);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.languageChip.selected {
+    background: rgba(217, 176, 99, 0.15);
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+}
+
+.languageChip:hover {
+    border-color: rgba(217, 176, 99, 0.3);
+}
+
+/* Add Tour Button */
+.addTourBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    border: 2px dashed var(--glass-border);
+    border-radius: 1rem;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.addTourBtn:hover {
+    border-color: rgba(217, 176, 99, 0.4);
+    color: var(--accent-gold);
+    background: rgba(217, 176, 99, 0.05);
+}
+
+.addTourBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Navigation Buttons */
+.navButtons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.prevBtn {
+    flex: 1;
+    padding: 0.875rem 1.5rem;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid var(--glass-border);
+    color: var(--text-primary);
+}
+
+.prevBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.nextBtn {
+    flex: 2;
+    padding: 0.875rem 1.5rem;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, var(--accent-gold) 0%, #e6c377 100%);
+    color: var(--text-primary);
+    border: none;
+}
+
+.nextBtn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(217, 176, 99, 0.4);
+}
+
+.nextBtn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.submitButton {
+    flex: 2;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submitButton:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+}
+
+.submitButton:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Tourist Link */
+.signupLink {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 1.5rem;
+}
+
+.signupLink a {
+    color: var(--accent-gold);
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.signupLink a:hover {
+    text-decoration: underline;
+}
+
+/* Duration Input */
+.durationInputGroup {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.durationInputGroup input {
+    flex: 1;
+}
+
+.durationUnit {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+/* Tour Counter */
+.tourCounter {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .wrapper {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .benefitsSection {
+        order: 1;
+        padding: 1rem;
+    }
+
+    .card {
+        order: 0;
+        max-height: none;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .inputRow,
+    .tourRow {
+        grid-template-columns: 1fr;
+    }
+
+    .stepsProgress {
+        gap: 0;
+    }
+
+    .stepLabel {
+        display: none;
+    }
+
+    .stepConnector {
+        width: 30px;
+    }
+
+    .illustration {
+        display: none;
+    }
+
+    .card {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .benefitsSection {
+        display: none;
+    }
+
+    .navButtons {
+        flex-direction: column-reverse;
+    }
+
+    .prevBtn,
+    .nextBtn,
+    .submitButton {
+        flex: auto;
+    }
+}

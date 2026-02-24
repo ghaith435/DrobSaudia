@@ -1,0 +1,330 @@
+.main {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #0a0a0a 0%, var(--bg-surface) 100%);
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.heroBackground {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.heroGradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(139, 69, 19, 0.3) 50%, rgba(10, 10, 10, 0.9) 100%);
+}
+
+.heroPattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+}
+
+.heroContent {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.heroTitle {
+    font-size: 3.5rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #d4af37 0%, #f4e5a1 50%, #d4af37 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+}
+
+.heroSubtitle {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Stats Section */
+.statsSection {
+    padding: 4rem 2rem;
+    background: linear-gradient(180deg, rgba(212, 175, 55, 0.1) 0%, transparent 100%);
+}
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.statCard {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 16px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.statCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+}
+
+.statNumber {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #d4af37;
+    margin-bottom: 0.5rem;
+}
+
+.statLabel {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Mission Section */
+.missionSection {
+    padding: 5rem 0;
+}
+
+.missionGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.missionCard {
+    padding: 3rem;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(139, 69, 19, 0.1) 100%);
+    border-radius: 24px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.missionCard:hover {
+    transform: scale(1.02);
+}
+
+.missionIcon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+}
+
+.missionTitle {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #d4af37;
+    margin-bottom: 1rem;
+}
+
+.missionText {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.8;
+}
+
+/* Values Section */
+.valuesSection {
+    padding: 5rem 0;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.sectionTitle {
+    font-size: 2.5rem;
+    font-weight: 800;
+    text-align: center;
+    color: #d4af37;
+    margin-bottom: 1rem;
+}
+
+.sectionSubtitle {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+}
+
+.valuesGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.valueCard {
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 16px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.valueCard:hover {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: rgba(212, 175, 55, 0.3);
+    transform: translateY(-5px);
+}
+
+.valueIcon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.valueTitle {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.valueDesc {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Team Section */
+.teamSection {
+    padding: 5rem 0;
+}
+
+.teamGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.teamCard {
+    padding: 2.5rem 1.5rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border-radius: 20px;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.teamCard:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 25px 50px rgba(212, 175, 55, 0.15);
+    border-color: rgba(212, 175, 55, 0.5);
+}
+
+.teamEmoji {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+.teamName {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.teamRole {
+    font-size: 0.9rem;
+    color: #d4af37;
+}
+
+/* CTA Section */
+.ctaSection {
+    padding: 6rem 2rem;
+    background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(139, 69, 19, 0.15) 100%);
+    text-align: center;
+}
+
+.ctaContent {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.ctaTitle {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.ctaSubtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 2rem;
+}
+
+.ctaButton {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+    color: #0a0a0a;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+
+    .statsGrid,
+    .valuesGrid,
+    .teamGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .missionGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .heroTitle {
+        font-size: 2.5rem;
+    }
+
+    .heroSubtitle {
+        font-size: 1.2rem;
+    }
+
+    .statsGrid,
+    .valuesGrid,
+    .teamGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .sectionTitle {
+        font-size: 2rem;
+    }
+}

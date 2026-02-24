@@ -1,0 +1,254 @@
+.container {
+    background: rgba(15, 23, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 24px;
+    backdrop-filter: blur(10px);
+}
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.icon {
+    font-size: 32px;
+    background: linear-gradient(135deg, #cfb53b 0%, #a18e33 100%);
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titleGroup {
+    flex: 1;
+}
+
+.title {
+    color: #f8fafc;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 4px 0;
+}
+
+.subtitle {
+    color: #94a3b8;
+    font-size: 14px;
+    margin: 0;
+}
+
+.languageSelector {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.languageButton {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(2, 6, 23, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    color: #f8fafc;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.languageButton:hover:not(:disabled) {
+    border-color: #cfb53b;
+}
+
+.languageButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.flag {
+    font-size: 20px;
+}
+
+.chevron {
+    margin-left: auto;
+    font-size: 10px;
+    color: #94a3b8;
+}
+
+.languageDropdown {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    overflow: hidden;
+    z-index: 100;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.languageOption {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 16px;
+    background: transparent;
+    border: none;
+    color: #f8fafc;
+    font-size: 14px;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.2s ease;
+}
+
+.languageOption:hover {
+    background: rgba(207, 181, 59, 0.1);
+}
+
+.languageOption.selected {
+    background: rgba(207, 181, 59, 0.2);
+    color: #cfb53b;
+}
+
+.error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
+.progressContainer {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    margin-bottom: 16px;
+    overflow: hidden;
+}
+
+.progressBar {
+    height: 100%;
+    background: linear-gradient(90deg, #cfb53b, #a18e33);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.controlButton {
+    flex: 1;
+    padding: 16px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.mainButton {
+    background: linear-gradient(135deg, #cfb53b 0%, #a18e33 100%);
+    color: #020617;
+    border: none;
+}
+
+.mainButton:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(207, 181, 59, 0.3);
+}
+
+.mainButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.stopButton {
+    background: transparent;
+    border: 1px solid rgba(239, 68, 68, 0.5);
+    color: #ef4444;
+}
+
+.stopButton:hover {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.scriptPreview {
+    background: rgba(2, 6, 23, 0.6);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.scriptPreview h4 {
+    color: #f8fafc;
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0 0 8px 0;
+}
+
+.scriptPreview p {
+    color: #94a3b8;
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #64748b;
+    font-size: 13px;
+}
+
+.feature span:first-child {
+    font-size: 16px;
+}
+
+@media (max-width: 480px) {
+    .controls {
+        flex-direction: column;
+    }
+
+    .features {
+        gap: 16px;
+    }
+}

@@ -1,0 +1,765 @@
+.container {
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--bg-surface) 0%, var(--bg-surface) 100%);
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, rgba(207, 181, 59, 0.1) 0%, transparent 50%);
+    padding: 100px 20px 40px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.levelCard {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(30, 41, 59, 0.8);
+    border: 2px solid rgba(207, 181, 59, 0.3);
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.levelIcon {
+    font-size: 48px;
+}
+
+.levelInfo {
+    flex: 1;
+}
+
+.levelInfo h2 {
+    color: white;
+    font-size: 1.4rem;
+    margin: 0 0 4px 0;
+}
+
+.levelInfo p {
+    color: #cfb53b;
+    margin: 0;
+    font-size: 14px;
+}
+
+.xpDisplay {
+    text-align: center;
+}
+
+.xpValue {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #cfb53b;
+}
+
+.xpLabel {
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+/* Progress Section */
+.progressSection {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+.progressHeader {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.progressHeader span:first-child {
+    color: #94a3b8;
+}
+
+.progressHeader span:last-child {
+    color: #cfb53b;
+}
+
+.progressBar {
+    height: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progressFill {
+    height: 100%;
+    background: linear-gradient(90deg, #cfb53b, #22c55e);
+    border-radius: 6px;
+    transition: width 0.5s ease;
+}
+
+.progressMeta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* Stats Row */
+.statsRow {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.statBox {
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+}
+
+.statValue {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 4px;
+}
+
+.statLabel {
+    color: #64748b;
+    font-size: 12px;
+}
+
+/* Perks */
+.perks {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.perks h3 {
+    color: #22c55e;
+    font-size: 14px;
+    margin: 0 0 12px 0;
+}
+
+.perksList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.perk {
+    color: #86efac;
+    font-size: 13px;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tabs button {
+    flex: 1;
+    padding: 16px;
+    background: none;
+    border: none;
+    color: #64748b;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+}
+
+.tabs button:hover {
+    color: #f8fafc;
+}
+
+.activeTab {
+    color: #cfb53b !important;
+}
+
+.activeTab::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 3px;
+    background: #cfb53b;
+    border-radius: 3px 3px 0 0;
+}
+
+/* Main Content */
+.main {
+    padding: 30px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Badges Content */
+.categoryFilter {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+}
+
+.categoryFilter button {
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+    color: #94a3b8;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.categoryFilter button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.activeCat {
+    background: linear-gradient(135deg, #cfb53b, #b8860b) !important;
+    color: var(--bg-surface) !important;
+    border-color: transparent !important;
+}
+
+.badgesGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.badgeCard {
+    background: rgba(30, 41, 59, 0.8);
+    border-radius: 16px;
+    padding: 20px;
+    position: relative;
+    transition: all 0.3s;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.badgeCard:hover {
+    transform: translateY(-4px);
+}
+
+.earned {
+    border-color: rgba(207, 181, 59, 0.3);
+}
+
+.locked {
+    opacity: 0.7;
+}
+
+.locked .badgeIcon {
+    filter: grayscale(1);
+}
+
+.badgeRarity {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 4px 10px;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 600;
+    color: white;
+}
+
+.badgeIcon {
+    font-size: 48px;
+    margin-bottom: 12px;
+}
+
+.badgeCard h4 {
+    color: white;
+    font-size: 15px;
+    margin: 0 0 8px 0;
+}
+
+.badgeCard p {
+    color: #94a3b8;
+    font-size: 13px;
+    margin: 0 0 12px 0;
+    line-height: 1.5;
+}
+
+.badgeXp {
+    color: #cfb53b;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.badgeProgress {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+}
+
+.badgeProgressFill {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    border-radius: 3px;
+}
+
+.badgeProgress span {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    font-size: 11px;
+    color: #64748b;
+}
+
+/* Leaderboard */
+.leaderboardContent h2 {
+    color: white;
+    font-size: 1.3rem;
+    margin: 0 0 24px 0;
+    text-align: center;
+}
+
+.topThree {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 30px;
+}
+
+.topUser {
+    background: rgba(30, 41, 59, 0.8);
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: center;
+    min-width: 120px;
+    position: relative;
+}
+
+.top1 {
+    order: 2;
+    transform: scale(1.1);
+    border: 2px solid #fbbf24;
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), transparent);
+}
+
+.top2 {
+    order: 1;
+    border: 1px solid #94a3b8;
+}
+
+.top3 {
+    order: 3;
+    border: 1px solid #cd7f32;
+}
+
+.topRank {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+}
+
+.topAvatar {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+.topUser h4 {
+    color: white;
+    font-size: 14px;
+    margin: 0 0 8px 0;
+}
+
+.topXp {
+    display: block;
+    color: #cfb53b;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.topBadges {
+    display: block;
+    color: #64748b;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+.leaderList {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.leaderRow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.2s;
+}
+
+.leaderRow:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.currentUser {
+    background: rgba(207, 181, 59, 0.1) !important;
+    border: 1px solid rgba(207, 181, 59, 0.3);
+}
+
+.leaderRank {
+    min-width: 40px;
+    font-size: 18px;
+    text-align: center;
+    color: #94a3b8;
+}
+
+.leaderInfo {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.leaderLevel {
+    font-size: 20px;
+}
+
+.leaderName {
+    color: white;
+    font-size: 14px;
+}
+
+.leaderStats {
+    display: flex;
+    gap: 16px;
+}
+
+.leaderXp {
+    color: #cfb53b;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.leaderBadges {
+    color: #64748b;
+    font-size: 13px;
+}
+
+/* Wallet Content */
+.walletContent {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.balanceCard {
+    background: linear-gradient(135deg, #cfb53b, #b8860b);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.balanceHeader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.balanceHeader span {
+    font-size: 24px;
+}
+
+.balanceHeader h3 {
+    color: var(--bg-surface);
+    margin: 0;
+    font-size: 16px;
+}
+
+.balanceValue {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--bg-surface);
+}
+
+.balanceValue span {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-right: 8px;
+}
+
+.balanceNote {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 13px;
+    margin: 12px 0 0 0;
+}
+
+.offersTitle {
+    color: white;
+    font-size: 1.1rem;
+    margin: 0 0 16px 0;
+}
+
+.offersList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.offerCard {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(30, 41, 59, 0.8);
+    border-radius: 16px;
+    padding: 16px;
+}
+
+.offerLogo {
+    font-size: 32px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+}
+
+.offerInfo {
+    flex: 1;
+}
+
+.offerInfo h4 {
+    color: white;
+    font-size: 15px;
+    margin: 0 0 4px 0;
+}
+
+.offerInfo p {
+    color: #94a3b8;
+    font-size: 13px;
+    margin: 0 0 6px 0;
+}
+
+.offerCategory {
+    font-size: 11px;
+    color: #64748b;
+    background: rgba(0, 0, 0, 0.04);
+    padding: 3px 8px;
+    border-radius: 6px;
+}
+
+.offerRight {
+    text-align: center;
+}
+
+.offerDiscount {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #22c55e;
+}
+
+.offerPoints {
+    display: block;
+    color: #94a3b8;
+    font-size: 12px;
+    margin-bottom: 8px;
+}
+
+.redeemBtn {
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(135deg, #cfb53b, #b8860b);
+    color: var(--bg-surface);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.redeemBtn:disabled {
+    background: rgba(255, 255, 255, 0.1);
+    color: #64748b;
+    cursor: not-allowed;
+}
+
+.redeemBtn:not(:disabled):hover {
+    transform: translateY(-2px);
+}
+
+.howToEarn {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+.howToEarn h3 {
+    color: #60a5fa;
+    font-size: 15px;
+    margin: 0 0 12px 0;
+}
+
+.howToEarn ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.howToEarn li {
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+/* QR Modal */
+.qrModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 20px;
+}
+
+.qrCard {
+    background: linear-gradient(135deg, var(--bg-surface), var(--bg-surface));
+    border-radius: 24px;
+    padding: 30px;
+    max-width: 350px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    border: 1px solid rgba(207, 181, 59, 0.3);
+}
+
+.closeQR {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.qrCard h3 {
+    color: white;
+    font-size: 1.3rem;
+    margin: 0 0 8px 0;
+}
+
+.qrCard>p {
+    color: #94a3b8;
+    font-size: 14px;
+    margin: 0 0 24px 0;
+}
+
+.qrCode {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.fakeQR {
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 16px;
+}
+
+.qrPattern {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 2px;
+    width: 100%;
+    height: 100%;
+}
+
+.qrPattern span {
+    border-radius: 2px;
+}
+
+.qrCodeText {
+    color: var(--bg-surface);
+    font-size: 11px;
+    font-family: monospace;
+    margin: 0;
+    word-break: break-all;
+}
+
+.qrNote {
+    color: #cbd5e1;
+    font-size: 14px;
+    margin: 0 0 8px 0;
+}
+
+.qrExpiry {
+    color: #f59e0b;
+    font-size: 12px;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .statsRow {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .topThree {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .top1,
+    .top2,
+    .top3 {
+        order: unset;
+        transform: none;
+        width: 100%;
+        max-width: 200px;
+    }
+
+    .badgesGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .offerCard {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .offerRight {
+        width: 100%;
+    }
+}

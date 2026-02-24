@@ -1,0 +1,618 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 9999px;
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.logoGold {
+    color: var(--accent-gold);
+}
+
+.menuToggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.navLinks {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.navLink {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+    white-space: nowrap;
+}
+
+.navLink:hover {
+    color: var(--accent-gold);
+}
+
+/* Active Nav Link */
+.navLinkActive {
+    color: var(--accent-gold) !important;
+    position: relative;
+}
+
+.navLinkActive::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 2px;
+    background: var(--accent-gold);
+    border-radius: 1px;
+}
+
+/* Discover Dropdown */
+.discoverWrapper {
+    position: relative;
+}
+
+.discoverBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 0;
+}
+
+.discoverArrow {
+    font-size: 0.55rem;
+    color: var(--text-secondary);
+    transition: transform 0.2s ease;
+}
+
+.discoverDropdown {
+    position: absolute;
+    top: calc(100% + 1rem);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 220px;
+    background: var(--bg-surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    padding: 0.5rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+    animation: fadeIn 0.2s ease-out;
+    z-index: 200;
+}
+
+[dir="rtl"] .discoverDropdown {
+    left: auto;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.discoverItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.discoverItem:hover {
+    background: rgba(0, 0, 0, 0.04);
+    color: var(--text-primary);
+}
+
+.discoverItemActive {
+    background: rgba(217, 176, 99, 0.1);
+    color: var(--accent-gold);
+}
+
+.discoverIcon {
+    font-size: 1.1rem;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.langBtn {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    padding: 0.5rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.langBtn:hover {
+    background: rgba(217, 176, 99, 0.1);
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+}
+
+.dashboardLink {
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.dashboardLink:hover {
+    background: rgba(217, 176, 99, 0.1);
+    border-color: var(--accent-gold);
+}
+
+.ctaBtn {
+    background: var(--accent-gold);
+    color: black;
+    padding: 0.5rem 1.25rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.ctaBtn:hover {
+    background: var(--accent-gold-dim);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(217, 176, 99, 0.3);
+}
+
+/* Mobile Responsive */
+@media (max-width: 900px) {
+    .container {
+        border-radius: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .menuToggle {
+        display: block;
+    }
+
+    .navLinks {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding: 1rem 0;
+        border-top: 1px solid var(--glass-border);
+        margin-top: 0.5rem;
+    }
+
+    .navLinks.open {
+        display: flex;
+    }
+
+    .navLink {
+        padding: 0.75rem;
+        width: 100%;
+        text-align: center;
+        border-radius: 0.5rem;
+    }
+
+    .navLink:hover {
+        background: rgba(0, 0, 0, 0.04);
+    }
+
+    .actions {
+        order: -1;
+        gap: 0.5rem;
+    }
+
+    .ctaBtn {
+        display: none;
+    }
+
+    .discoverWrapper {
+        width: 100%;
+    }
+
+    .discoverBtn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+    }
+
+    .discoverBtn:hover {
+        background: rgba(0, 0, 0, 0.04);
+    }
+
+    .discoverDropdown {
+        position: static;
+        transform: none;
+        min-width: unset;
+        box-shadow: none;
+        border: none;
+        border-top: 1px solid var(--glass-border);
+        border-radius: 0;
+        margin-top: 0.25rem;
+        padding: 0.25rem 0;
+        background: transparent;
+        backdrop-filter: none;
+    }
+}
+
+/* RTL Support */
+[dir="rtl"] .navLinks {
+    flex-direction: row-reverse;
+}
+
+[dir="rtl"] .actions {
+    flex-direction: row-reverse;
+}
+
+@media (max-width: 900px) {
+    [dir="rtl"] .navLinks {
+        flex-direction: column;
+    }
+}
+
+/* User Section */
+.userSection {
+    position: relative;
+}
+
+.userBtn {
+    width: 40px;
+    height: 40px;
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    overflow: hidden;
+}
+
+.userBtn:hover {
+    background: rgba(217, 176, 99, 0.1);
+    border-color: var(--accent-gold);
+}
+
+.userAvatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.userIcon {
+    font-size: 1.25rem;
+}
+
+.userLoading {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, var(--glass-bg) 25%, rgba(255, 255, 255, 0.1) 50%, var(--glass-bg) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* User Dropdown Menu */
+.userMenu {
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    right: 0;
+    width: 250px;
+    background: var(--bg-surface);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    padding: 0.75rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    animation: fadeIn 0.2s ease-out;
+    z-index: 200;
+}
+
+[dir="rtl"] .userMenu {
+    right: auto;
+    left: 0;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.userInfo {
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.userInfo strong {
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.userInfo span {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.menuDivider {
+    height: 1px;
+    background: var(--glass-border);
+    margin: 0.5rem 0;
+}
+
+.menuItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.menuItem:hover {
+    background: rgba(0, 0, 0, 0.04);
+    color: var(--text-primary);
+}
+
+.logoutBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.75rem;
+    background: transparent;
+    border: none;
+    color: #f87171;
+    font-size: 0.9rem;
+    font-family: inherit;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.logoutBtn:hover {
+    background: rgba(248, 113, 113, 0.1);
+}
+
+/* Auth Buttons */
+.authButtons {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.loginBtn {
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid var(--glass-border);
+    color: var(--text-secondary);
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.loginBtn:hover {
+    background: rgba(217, 176, 99, 0.1);
+    border-color: var(--accent-gold);
+    color: var(--accent-gold);
+}
+
+/* Backdrop */
+.backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 150;
+}
+
+/* City Selector */
+.citySelector {
+    position: relative;
+}
+
+.citySelectorBtn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(217, 176, 99, 0.1);
+    border: 1px solid rgba(217, 176, 99, 0.3);
+    border-radius: 9999px;
+    color: var(--accent-gold);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.citySelectorBtn:hover {
+    background: rgba(217, 176, 99, 0.2);
+    border-color: var(--accent-gold);
+}
+
+.cityIcon {
+    font-size: 1rem;
+}
+
+.cityName {
+    white-space: nowrap;
+}
+
+.cityArrow {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+}
+
+.cityDropdown {
+    position: absolute;
+    top: calc(100% + 0.75rem);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 200px;
+    background: var(--bg-surface);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    border-radius: 1rem;
+    padding: 0.5rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    animation: fadeIn 0.2s ease-out;
+    z-index: 200;
+}
+
+.cityDropdownHeader {
+    padding: 0.75rem 1rem;
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--glass-border);
+    margin-bottom: 0.5rem;
+}
+
+.cityOption {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-family: inherit;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: inherit;
+}
+
+.cityOption:hover {
+    background: rgba(0, 0, 0, 0.04);
+    color: var(--text-primary);
+}
+
+.cityOption.selected {
+    background: rgba(217, 176, 99, 0.1);
+    color: var(--accent-gold);
+}
+
+.cityOption.selected span:last-child {
+    color: var(--accent-gold);
+    font-weight: 700;
+}
+
+/* Mobile responsive for city selector */
+@media (max-width: 768px) {
+    .citySelector {
+        order: 0;
+    }
+
+    .citySelectorBtn {
+        padding: 0.4rem 0.75rem;
+        font-size: 0.8rem;
+    }
+
+    .cityName {
+        max-width: 80px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .cityDropdown {
+        left: 0;
+        transform: none;
+        min-width: 180px;
+    }
+}
+
+[dir="rtl"] .cityDropdown {
+    left: auto;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+@media (max-width: 768px) {
+    [dir="rtl"] .cityDropdown {
+        right: 0;
+        left: auto;
+        transform: none;
+    }
+}

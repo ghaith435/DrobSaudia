@@ -1,0 +1,68 @@
+.toggle {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.toggle:hover {
+    border-color: var(--accent-gold);
+    background: rgba(217, 176, 99, 0.1);
+}
+
+.iconWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.light .iconWrapper {
+    transform: rotate(180deg);
+}
+
+.sunIcon,
+.moonIcon {
+    font-size: 1.1rem;
+    position: absolute;
+    transition: all 0.3s;
+}
+
+.sunIcon {
+    opacity: 0;
+    transform: scale(0.5) rotate(90deg);
+}
+
+.moonIcon {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+.light .sunIcon {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+.light .moonIcon {
+    opacity: 0;
+    transform: scale(0.5) rotate(-90deg);
+}
+
+/* Light theme button style */
+[data-theme="light"] .toggle {
+    background: rgba(0, 0, 0, 0.06);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="light"] .toggle:hover {
+    background: rgba(0, 0, 0, 0.1);
+    border-color: var(--accent-gold);
+}

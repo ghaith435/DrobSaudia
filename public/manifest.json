@@ -1,0 +1,78 @@
+{
+    "name": "دليل الرياض - Riyadh Guide",
+    "short_name": "دليل الرياض",
+    "description": "الدليل السياحي الذكي للرياض - اكتشف المعالم والفعاليات والجولات الصوتية",
+    "start_url": "/",
+    "scope": "/",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "theme_color": "#0a0a0f",
+    "background_color": "#0a0a0f",
+    "dir": "rtl",
+    "lang": "ar",
+    "categories": [
+        "travel",
+        "tourism",
+        "navigation"
+    ],
+    "icons": [
+        {
+            "src": "/favicon.ico",
+            "sizes": "64x64",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "/icons/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/icons/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "screenshots": [],
+    "shortcuts": [
+        {
+            "name": "الخريطة",
+            "short_name": "خريطة",
+            "description": "افتح الخريطة التفاعلية",
+            "url": "/maps",
+            "icons": [
+                {
+                    "src": "/favicon.ico",
+                    "sizes": "64x64"
+                }
+            ]
+        },
+        {
+            "name": "جولات صوتية",
+            "short_name": "جولات",
+            "description": "استعرض الجولات الصوتية",
+            "url": "/audio-tours",
+            "icons": [
+                {
+                    "src": "/favicon.ico",
+                    "sizes": "64x64"
+                }
+            ]
+        },
+        {
+            "name": "المكافآت",
+            "short_name": "مكافآت",
+            "description": "اعرض نقاطك ومكافآتك",
+            "url": "/rewards",
+            "icons": [
+                {
+                    "src": "/favicon.ico",
+                    "sizes": "64x64"
+                }
+            ]
+        }
+    ],
+    "related_applications": [],
+    "prefer_related_applications": false
+}

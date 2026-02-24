@@ -1,0 +1,365 @@
+.container {
+    margin: 20px 0;
+}
+
+/* Toggle Button */
+.toggleBtn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    border-radius: 14px;
+    border: 2px solid rgba(139, 92, 246, 0.3);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(59, 130, 246, 0.1));
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+    width: 100%;
+}
+
+.toggleBtn:hover {
+    border-color: rgba(139, 92, 246, 0.6);
+    transform: translateY(-2px);
+}
+
+.toggleBtn.active {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(59, 130, 246, 0.2));
+    border-color: #8b5cf6;
+}
+
+.icon {
+    font-size: 24px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* AR View */
+.arView {
+    margin-top: 20px;
+    background: rgba(30, 41, 59, 0.9);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    animation: slideIn 0.4s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.arHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.arHeader h3 {
+    color: white;
+    font-size: 15px;
+    margin: 0;
+}
+
+.modeToggle {
+    display: flex;
+    gap: 8px;
+}
+
+.modeToggle button {
+    padding: 8px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: transparent;
+    color: #94a3b8;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.modeToggle button:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.activeMode {
+    background: rgba(139, 92, 246, 0.2) !important;
+    border-color: #8b5cf6 !important;
+    color: white !important;
+}
+
+/* Image Comparison */
+.comparison {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+    cursor: ew-resize;
+}
+
+.currentImage,
+.historicalImage {
+    position: absolute;
+    inset: 0;
+}
+
+.currentImage img,
+.historicalImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.historicalOverlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+}
+
+.vintageEffect {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(to bottom, rgba(139, 92, 50, 0.1), rgba(139, 92, 50, 0.2)),
+        repeating-linear-gradient(0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.03) 2px,
+            rgba(0, 0, 0, 0.03) 4px);
+}
+
+.yearLabel {
+    position: absolute;
+    bottom: 16px;
+    padding: 6px 14px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.currentImage .yearLabel {
+    right: 16px;
+}
+
+.historicalImage .yearLabel {
+    left: 16px;
+    background: rgba(139, 92, 50, 0.9);
+}
+
+/* Slider */
+.slider {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: white;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+.sliderHandle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 44px;
+    height: 44px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.sliderHandle span {
+    color: #0f172a;
+    font-size: 10px;
+}
+
+.sliderInput {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: ew-resize;
+    z-index: 20;
+}
+
+/* Camera View */
+.cameraView {
+    position: relative;
+    height: 300px;
+    background: #000;
+}
+
+.cameraFeed {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.arOverlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.scanningEffect {
+    text-align: center;
+    animation: scanning 2s ease-in-out infinite;
+}
+
+@keyframes scanning {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.scanningEffect span {
+    font-size: 48px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.scanningEffect p {
+    color: white;
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Description */
+.description {
+    padding: 20px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.yearBadge {
+    display: inline-block;
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.description p {
+    color: #cbd5e1;
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+/* Timeline */
+.timeline {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.timelineStart,
+.timelineEnd {
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: 500;
+    min-width: 50px;
+}
+
+.timelineEnd {
+    text-align: right;
+}
+
+.timelineLine {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.timelineProgress {
+    height: 100%;
+    background: linear-gradient(90deg, #8b5cf6, #60a5fa);
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+
+/* Info Note */
+.infoNote {
+    display: flex;
+    gap: 10px;
+    padding: 14px 20px;
+    align-items: flex-start;
+}
+
+.infoNote span {
+    font-size: 16px;
+}
+
+.infoNote p {
+    color: #64748b;
+    font-size: 12px;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+
+    .comparison,
+    .cameraView {
+        height: 250px;
+    }
+
+    .arHeader {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .modeToggle {
+        width: 100%;
+    }
+
+    .modeToggle button {
+        flex: 1;
+    }
+}

@@ -1,0 +1,876 @@
+/* Audio Tours Admin Styles */
+
+.container {
+    padding: 24px;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #0a0a1a 0%, #0f0f2a 100%);
+    color: white;
+    direction: rtl;
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.headerLeft {
+    flex: 1;
+}
+
+.backLink {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.6);
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+    transition: color 0.3s;
+}
+
+.backLink:hover {
+    color: #00d4ff;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin: 0;
+    background: linear-gradient(135deg, #00d4ff, #00ff88);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin: 8px 0 0;
+}
+
+.headerStats {
+    display: flex;
+    gap: 20px;
+}
+
+.stat {
+    text-align: center;
+    padding: 16px 24px;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.statValue {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #00d4ff;
+}
+
+.statLabel {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Notification */
+.notification {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-size: 1rem;
+    z-index: 1000;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.notification.success {
+    background: linear-gradient(135deg, rgba(0, 255, 136, 0.2), rgba(0, 212, 255, 0.2));
+    border: 1px solid rgba(0, 255, 136, 0.4);
+    color: #00ff88;
+}
+
+.notification.error {
+    background: rgba(255, 59, 48, 0.2);
+    border: 1px solid rgba(255, 59, 48, 0.4);
+    color: #ff6b6b;
+}
+
+/* Tabs */
+.tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.tab {
+    padding: 14px 28px;
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.tab.active {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 255, 136, 0.2));
+    border-color: rgba(0, 212, 255, 0.4);
+    color: #00d4ff;
+}
+
+/* Filters */
+.filters {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.searchBox {
+    flex: 1;
+    min-width: 250px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 18px;
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+}
+
+.searchBox input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+}
+
+.searchBox input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.filterSelect {
+    padding: 12px 18px;
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    outline: none;
+}
+
+.filterSelect option {
+    background: var(--bg-surface);
+    color: white;
+}
+
+/* Loading & Empty State */
+.loading,
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.loading span,
+.emptyState span {
+    font-size: 3rem;
+    margin-bottom: 16px;
+}
+
+.spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Tours List */
+.toursList {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.tourCard {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.tourCard:hover {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 212, 255, 0.2);
+}
+
+.tourImage {
+    position: relative;
+    width: 160px;
+    height: 120px;
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.tourImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.imagePlaceholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.04);
+    font-size: 2.5rem;
+}
+
+.featuredBadge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    padding: 4px 10px;
+    background: linear-gradient(135deg, #ffd700, #ff9500);
+    border-radius: 20px;
+    font-size: 0.75rem;
+    color: #000;
+    font-weight: 600;
+}
+
+.tourInfo {
+    flex: 1;
+}
+
+.tourTitle {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 4px;
+    color: white;
+}
+
+.tourTitleEn {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 8px;
+}
+
+.tourDesc {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 12px;
+    line-height: 1.5;
+}
+
+.tourMeta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.metaItem {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.tourTags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    padding: 4px 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.tag.tourism_authority {
+    background: rgba(0, 212, 255, 0.2);
+    color: #00d4ff;
+}
+
+.tag.ai_generated {
+    background: rgba(138, 43, 226, 0.2);
+    color: #bf7cff;
+}
+
+.tag.manual {
+    background: rgba(0, 255, 136, 0.2);
+    color: #00ff88;
+}
+
+.tourActions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+}
+
+.editBtn,
+.deleteBtn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.editBtn {
+    background: rgba(0, 212, 255, 0.2);
+    color: #00d4ff;
+}
+
+.editBtn:hover {
+    background: rgba(0, 212, 255, 0.3);
+}
+
+.deleteBtn {
+    background: rgba(255, 59, 48, 0.2);
+    color: #ff6b6b;
+}
+
+.deleteBtn:hover {
+    background: rgba(255, 59, 48, 0.3);
+}
+
+/* Form Section */
+.formSection {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.formCard {
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+}
+
+.sectionTitle {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.formGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.formGroup label {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 500;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+    padding: 12px 16px;
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+    border-color: rgba(0, 212, 255, 0.5);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.formGroup input::placeholder,
+.formGroup textarea::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.formGroup select option {
+    background: var(--bg-surface);
+}
+
+.formGroup textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.aiBtn {
+    align-self: flex-start;
+    margin-top: 8px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(0, 212, 255, 0.3));
+    border: 1px solid rgba(138, 43, 226, 0.4);
+    border-radius: 10px;
+    color: #bf7cff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.aiBtn:hover {
+    background: linear-gradient(135deg, rgba(138, 43, 226, 0.4), rgba(0, 212, 255, 0.4));
+}
+
+.checkboxGroup {
+    display: flex;
+    gap: 24px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.95rem;
+}
+
+.checkbox input {
+    width: 20px;
+    height: 20px;
+    accent-color: #00d4ff;
+}
+
+/* Stops Section */
+.stopsList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.stopItem {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 18px;
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+}
+
+.stopOrder {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #00d4ff, #00ff88);
+    border-radius: 50%;
+    font-weight: 700;
+    color: #000;
+}
+
+.stopInfo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.stopInfo strong {
+    color: white;
+}
+
+.stopInfo span {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.stopDuration {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.removeBtn {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 59, 48, 0.2);
+    border: none;
+    border-radius: 50%;
+    color: #ff6b6b;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.removeBtn:hover {
+    background: rgba(255, 59, 48, 0.4);
+}
+
+.addStopSection {
+    padding: 20px;
+    background: rgba(0, 212, 255, 0.05);
+    border: 1px dashed rgba(0, 212, 255, 0.3);
+    border-radius: 16px;
+}
+
+.addStopSection h3 {
+    font-size: 1rem;
+    margin: 0 0 16px;
+    color: #00d4ff;
+}
+
+.addStopBtn {
+    margin-top: 16px;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(0, 255, 136, 0.2));
+    border: 1px solid rgba(0, 212, 255, 0.4);
+    border-radius: 12px;
+    color: #00d4ff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.addStopBtn:hover {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.3), rgba(0, 255, 136, 0.3));
+}
+
+/* Form Actions */
+.formActions {
+    display: flex;
+    gap: 16px;
+    justify-content: flex-end;
+}
+
+.submitBtn {
+    padding: 16px 40px;
+    background: linear-gradient(135deg, #00d4ff, #00ff88);
+    border: none;
+    border-radius: 14px;
+    color: #000;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+}
+
+.submitBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(0, 212, 255, 0.5);
+}
+
+.cancelBtn {
+    padding: 16px 32px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cancelBtn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .header {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .headerStats {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .formGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .tourCard {
+        flex-direction: column;
+    }
+
+    .tourImage {
+        width: 100%;
+        height: 180px;
+    }
+
+    .tourActions {
+        flex-direction: row;
+    }
+
+    .filters {
+        flex-direction: column;
+    }
+
+    .formActions {
+        flex-direction: column;
+    }
+
+    .submitBtn,
+    .cancelBtn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* New Features */
+
+/* Reset Button */
+.resetBtn {
+    padding: 12px 16px;
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.resetBtn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #00d4ff;
+}
+
+/* Clear Search */
+.clearSearch {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.clearSearch:hover {
+    color: #ff6b6b;
+}
+
+/* Add First Button */
+.addFirstBtn {
+    margin-top: 16px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #00d4ff, #00ff88);
+    border: none;
+    border-radius: 12px;
+    color: #000;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.addFirstBtn:hover {
+    transform: scale(1.05);
+}
+
+/* Duplicate Button */
+.duplicateBtn {
+    padding: 10px 20px;
+    background: rgba(138, 43, 226, 0.2);
+    border: none;
+    border-radius: 10px;
+    color: #bf7cff;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.duplicateBtn:hover {
+    background: rgba(138, 43, 226, 0.3);
+}
+
+/* Editing Banner */
+.editingBanner {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.2), rgba(255, 152, 0, 0.2));
+    border: 1px solid rgba(255, 193, 7, 0.4);
+    border-radius: 14px;
+    color: #ffc107;
+    font-size: 1rem;
+}
+
+.editingBanner strong {
+    color: white;
+}
+
+.cancelEditBtn {
+    margin-right: auto;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cancelEditBtn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Image Preview */
+.imagePreview {
+    margin-top: 12px;
+    width: 100%;
+    max-width: 300px;
+    height: 150px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(0, 0, 0, 0.04);
+}
+
+.imagePreview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Full Width Form Group */
+.fullWidth {
+    grid-column: 1 / -1;
+}
+
+/* Stop Item Editing State */
+.stopItem.editing {
+    background: rgba(0, 212, 255, 0.1);
+    border-color: rgba(0, 212, 255, 0.4);
+}
+
+/* Stop Actions */
+.stopActions {
+    display: flex;
+    gap: 8px;
+}
+
+.moveBtn {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    border-radius: 6px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.moveBtn:hover:not(:disabled) {
+    background: rgba(0, 212, 255, 0.2);
+    color: #00d4ff;
+}
+
+.moveBtn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.editStopBtn {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 212, 255, 0.2);
+    border: none;
+    border-radius: 6px;
+    color: #00d4ff;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.editStopBtn:hover {
+    background: rgba(0, 212, 255, 0.3);
+}
+
+/* Stop Form Actions */
+.stopFormActions {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.cancelStopBtn {
+    padding: 12px 24px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cancelStopBtn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}

@@ -1,0 +1,580 @@
+/* Statistics Page Styles */
+
+.page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--bg-deep) 0%, var(--bg-surface) 50%, var(--bg-surface) 100%);
+}
+
+.loadingContainer {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--bg-deep) 0%, var(--bg-surface) 100%);
+}
+
+.spinner {
+    width: 48px;
+    height: 48px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top-color: #d4af37;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.main {
+    padding: 6rem 2rem 4rem;
+    position: relative;
+}
+
+.bgDecor {
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(ellipse at 20% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(59, 130, 246, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Header */
+.header {
+    max-width: 1400px;
+    margin: 0 auto 3rem;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.icon {
+    font-size: 2.5rem;
+}
+
+.subtitle {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.125rem;
+}
+
+/* Sections */
+.section {
+    max-width: 1400px;
+    margin: 0 auto 2.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.sectionTitle {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Overview Grid */
+.overviewGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.statCard {
+    background: rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s;
+}
+
+.statCard:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(212, 175, 55, 0.3);
+    transform: translateY(-2px);
+}
+
+.statIcon {
+    font-size: 2.5rem;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(212, 175, 55, 0.1);
+    border-radius: 12px;
+}
+
+.statInfo {
+    flex: 1;
+}
+
+.statValue {
+    display: block;
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.statLabel {
+    display: block;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 0.25rem;
+}
+
+.statTrend {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+}
+
+.statTrend.positive {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+}
+
+.statTrend.negative {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+}
+
+/* AI Usage Grid */
+.aiUsageGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+}
+
+.aiCard {
+    background: rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.aiIcon {
+    font-size: 1.75rem;
+}
+
+.aiInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.aiValue {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #d4af37;
+}
+
+.aiLabel {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.aiProgress {
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.aiProgressBar {
+    height: 100%;
+    background: linear-gradient(90deg, #d4af37, #f4d03f);
+    border-radius: 3px;
+    transition: width 0.5s ease;
+}
+
+/* Charts Row */
+.chartsRow {
+    max-width: 1400px;
+    margin: 0 auto 2.5rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 1024px) {
+    .chartsRow {
+        grid-template-columns: 1fr;
+    }
+}
+
+.chartCard {
+    background: rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.chartCard h3 {
+    font-size: 1.125rem;
+    color: #fff;
+    margin-bottom: 1.25rem;
+}
+
+.chartHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+}
+
+.chartHeader h3 {
+    margin-bottom: 0;
+}
+
+.timeRangeSelector {
+    display: flex;
+    gap: 0.25rem;
+    background: rgba(0, 0, 0, 0.04);
+    padding: 0.25rem;
+    border-radius: 8px;
+}
+
+.rangeBtn {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.3s;
+}
+
+.rangeBtn:hover {
+    color: #fff;
+}
+
+.activeRange {
+    background: #d4af37;
+    color: #000 !important;
+    font-weight: 600;
+}
+
+/* Bar Chart */
+.chart {
+    height: 250px;
+}
+
+.barChart {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    height: 100%;
+    padding-bottom: 2rem;
+}
+
+.barContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    height: 100%;
+    justify-content: flex-end;
+}
+
+.bar {
+    width: 40px;
+    background: linear-gradient(180deg, #d4af37 0%, rgba(212, 175, 55, 0.4) 100%);
+    border-radius: 4px 4px 0 0;
+    display: flex;
+    justify-content: center;
+    transition: height 0.5s ease;
+    position: relative;
+}
+
+.barValue {
+    position: absolute;
+    top: -25px;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 600;
+}
+
+.barLabel {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Category List */
+.categoryList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.categoryItem {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.categoryInfo {
+    display: flex;
+    justify-content: space-between;
+    width: 120px;
+    flex-shrink: 0;
+}
+
+.categoryName {
+    color: #fff;
+    font-size: 0.9rem;
+}
+
+.categoryCount {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+}
+
+.categoryBar {
+    flex: 1;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.categoryProgress {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.categoryPercent {
+    width: 40px;
+    text-align: right;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+}
+
+/* Bottom Row */
+.bottomRow {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.listCard {
+    background: rgba(0, 0, 0, 0.04);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 1.5rem;
+}
+
+.listCard h3 {
+    font-size: 1.125rem;
+    color: #fff;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Places List */
+.placesList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.placeItem {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.placeItem:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.placeRank {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(212, 175, 55, 0.1);
+    color: #d4af37;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.placeInfo {
+    flex: 1;
+}
+
+.placeName {
+    display: block;
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.placeVisits {
+    display: block;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.placeRating {
+    background: rgba(245, 158, 11, 0.1);
+    color: #f59e0b;
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+/* Activity List */
+.activityList {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.activityItem {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem;
+    background: rgba(0, 0, 0, 0.03);
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.activityItem:hover {
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.activityIcon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 10px;
+    font-size: 1.25rem;
+}
+
+.activityInfo {
+    flex: 1;
+}
+
+.activityDesc {
+    display: block;
+    color: #fff;
+    font-size: 0.95rem;
+    margin-bottom: 0.25rem;
+}
+
+.activityTime {
+    display: block;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main {
+        padding: 5rem 1rem 3rem;
+    }
+
+    .title {
+        font-size: 1.75rem;
+    }
+
+    .icon {
+        font-size: 1.75rem;
+    }
+
+    .overviewGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .statCard {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.25rem 1rem;
+    }
+
+    .statInfo {
+        width: 100%;
+    }
+
+    .statTrend {
+        margin-top: 0.5rem;
+    }
+
+    .aiUsageGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .bottomRow {
+        grid-template-columns: 1fr;
+    }
+
+    .categoryInfo {
+        width: 80px;
+    }
+
+    .categoryName {
+        font-size: 0.8rem;
+    }
+
+    .bar {
+        width: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .overviewGrid {
+        grid-template-columns: 1fr;
+    }
+
+    .aiUsageGrid {
+        grid-template-columns: 1fr;
+    }
+}

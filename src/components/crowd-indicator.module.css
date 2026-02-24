@@ -1,0 +1,318 @@
+.container {
+    cursor: pointer;
+    user-select: none;
+}
+
+.compact {
+    position: relative;
+}
+
+/* Loading */
+.loading {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    background: rgba(0, 0, 0, 0.04);
+    border-radius: 10px;
+    color: #94a3b8;
+    font-size: 12px;
+}
+
+.loadingDot {
+    width: 8px;
+    height: 8px;
+    background: #60a5fa;
+    border-radius: 50%;
+    animation: pulse 1s ease infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 0.5;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Indicator */
+.indicator {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.compact .indicator {
+    flex-direction: row;
+    align-items: center;
+}
+
+.levelBadge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    width: fit-content;
+}
+
+.compact .levelBadge {
+    padding: 6px 10px;
+    font-size: 11px;
+}
+
+.levelIcon {
+    font-size: 16px;
+}
+
+.compact .levelIcon {
+    font-size: 14px;
+}
+
+.levelText {
+    white-space: nowrap;
+}
+
+/* Percentage Bar */
+.percentageBar {
+    position: relative;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.percentageFill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.percentageText {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    color: white;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Details Panel */
+.details {
+    margin-top: 16px;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.recommendation {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 8px;
+    margin-bottom: 16px;
+    color: #60a5fa;
+    font-size: 13px;
+}
+
+.recommendationIcon {
+    font-size: 18px;
+}
+
+/* Hourly Chart */
+.hourlyChart {
+    margin-bottom: 16px;
+}
+
+.hourlyChart h4 {
+    color: white;
+    font-size: 13px;
+    margin: 0 0 12px 0;
+    font-weight: 500;
+}
+
+.chartBars {
+    display: flex;
+    align-items: flex-end;
+    gap: 4px;
+    height: 80px;
+    padding-bottom: 24px;
+    overflow-x: auto;
+}
+
+.chartBar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 24px;
+    height: 100%;
+    position: relative;
+    justify-content: flex-end;
+}
+
+.bar {
+    width: 100%;
+    min-height: 4px;
+    border-radius: 3px;
+    transition: height 0.3s ease;
+}
+
+.currentHour .bar {
+    box-shadow: 0 0 8px currentColor;
+}
+
+.currentHour::after {
+    content: '▼';
+    position: absolute;
+    top: -20px;
+    font-size: 10px;
+    color: #cfb53b;
+}
+
+.hourLabel {
+    position: absolute;
+    bottom: 0;
+    font-size: 9px;
+    color: #64748b;
+    white-space: nowrap;
+}
+
+/* Best Times */
+.bestTimes {
+    margin-bottom: 16px;
+}
+
+.bestTimes h4 {
+    color: white;
+    font-size: 13px;
+    margin: 0 0 10px 0;
+    font-weight: 500;
+}
+
+.timeSuggestions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.timeBadge {
+    background: rgba(34, 197, 94, 0.15);
+    color: #22c55e;
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.noLowCrowd {
+    color: #f59e0b;
+    font-size: 12px;
+}
+
+/* Live Notice */
+.liveNotice {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: #64748b;
+}
+
+.liveDot {
+    width: 8px;
+    height: 8px;
+    background: #22c55e;
+    border-radius: 50%;
+    animation: blink 2s ease infinite;
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+}
+
+/* Compact Tooltip */
+.tooltip {
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.compact:hover .tooltip {
+    opacity: 1;
+    visibility: visible;
+}
+
+.tooltipContent {
+    background: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 12px;
+    min-width: 180px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.tooltipContent::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #1e293b;
+}
+
+.tooltipContent strong {
+    display: block;
+    color: white;
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.tooltipContent p {
+    color: #94a3b8;
+    font-size: 11px;
+    margin: 0;
+}

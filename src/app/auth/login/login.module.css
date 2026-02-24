@@ -1,0 +1,279 @@
+.container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-deep);
+    padding: 20px;
+}
+
+.card {
+    background: var(--glass-bg);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 48px;
+    width: 100%;
+    max-width: 420px;
+    backdrop-filter: blur(20px);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.logo {
+    font-size: 32px;
+    font-weight: 800;
+    color: #f8fafc;
+    margin-bottom: 8px;
+}
+
+.logoGold {
+    color: #cfb53b;
+}
+
+.subtitle {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.notice {
+    background: rgba(245, 158, 11, 0.1);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+    color: #f59e0b;
+    padding: 12px 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.inputGroup label {
+    color: #f8fafc;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.inputGroup input {
+    background: rgba(2, 6, 23, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 14px 16px;
+    color: #f8fafc;
+    font-size: 16px;
+    transition: all 0.2s ease;
+}
+
+.inputGroup input:focus {
+    outline: none;
+    border-color: #cfb53b;
+    box-shadow: 0 0 0 3px rgba(207, 181, 59, 0.1);
+}
+
+.inputGroup input::placeholder {
+    color: #64748b;
+}
+
+.submitButton {
+    background: linear-gradient(135deg, #cfb53b 0%, #a18e33 100%);
+    color: var(--text-primary);
+    border: none;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 8px;
+}
+
+.submitButton:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(207, 181, 59, 0.3);
+}
+
+.submitButton:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 24px 0;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.divider span {
+    color: #64748b;
+    font-size: 13px;
+}
+
+.googleButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: #f8fafc;
+    color: var(--text-primary);
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%;
+}
+
+.googleButton:hover {
+    background: #e2e8f0;
+    transform: translateY(-2px);
+}
+
+.signupLink {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 14px;
+    margin-top: 24px;
+}
+
+.signupLink a {
+    color: #cfb53b;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.signupLink a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: 32px 24px;
+    }
+
+    .logo {
+        font-size: 28px;
+    }
+}
+
+/* New enhanced styles */
+.bgDecor {
+    position: fixed;
+    top: -50%;
+    right: -20%;
+    width: 80%;
+    height: 150%;
+    background: radial-gradient(ellipse, rgba(207, 181, 59, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+[dir="rtl"] .bgDecor {
+    right: auto;
+    left: -20%;
+}
+
+.langToggle {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(0, 0, 0, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+[dir="rtl"] .langToggle {
+    right: auto;
+    left: 16px;
+}
+
+.langToggle:hover {
+    background: rgba(207, 181, 59, 0.1);
+    border-color: #cfb53b;
+    color: #cfb53b;
+}
+
+.card {
+    position: relative;
+}
+
+.logoContainer {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, rgba(207, 181, 59, 0.2), rgba(207, 181, 59, 0.05));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    border: 2px solid rgba(207, 181, 59, 0.3);
+}
+
+.logoIcon {
+    font-size: 36px;
+}
+
+.welcome {
+    font-size: 24px;
+    font-weight: 700;
+    color: #f8fafc;
+    margin: 8px 0 4px;
+}
+
+/* RTL Support */
+[dir="rtl"] .inputGroup input {
+    text-align: right;
+}
+
+[dir="rtl"] .inputGroup label {
+    text-align: right;
+}
+
+[dir="rtl"] .error {
+    text-align: right;
+}
+
+[dir="rtl"] .googleButton {
+    flex-direction: row-reverse;
+}

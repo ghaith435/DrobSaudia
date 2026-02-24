@@ -1,0 +1,1409 @@
+// Riyadh Tourism Platform - Prisma Schema
+// PostgreSQL Database
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ============================================
+// USERS & AUTHENTICATION
+// ============================================
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  nameAr        String?
+  password      String?
+  phone         String?
+  image         String?
+  role          UserRole  @default(USER)
+  isActive      Boolean   @default(true)
+  isVerified    Boolean   @default(false)
+  verifiedAt    DateTime?
+  lastLoginAt   DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relations
+  reviews           Review[]
+  favorites         Favorite[]
+  trips             Trip[]
+  placeOwnerships   PlaceOwnership[]
+  partnerProfile    PartnerProfile?
+
+  @@map("users")
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  MODERATOR
+  PARTNER
+  PLACE_OWNER
+}
+
+// ============================================
+// PLACES & CATEGORIES
+// ============================================
+
+model Category {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  nameAr      String?
+  slug        String   @unique
+  icon        String?
+  description String?
+  image       String?
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  places      Place[]
+
+  @@map("categories")
+}
+
+model Place {
+  id            String   @id @default(cuid())
+  name          String
+  nameAr        String?
+  slug          String   @unique
+  description   String
+  descriptionAr String?
+  image         String
+  gallery       String[] @default([])
+  rating        Float    @default(0)
+  reviewCount   Int      @default(0)
+  price         PriceLevel @default(FREE)
+  
+  // Location
+  address       String
+  addressAr     String?
+  latitude      Float
+  longitude     Float
+  
+  // Contact & Hours
+  phone         String?
+  website       String?
+  openingHours  String?
+  
+  // Features
+  features      String[] @default([])
+  
+  // Status
+  isActive      Boolean  @default(true)
+  isFeatured    Boolean  @default(false)
+  viewCount     Int      @default(0)
+  
+  // Timestamps
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  categoryId    String
+  category      Category @relation(fields: [categoryId], references: [id])
+  reviews       Review[]
+  favorites     Favorite[]
+  tripPlaces    TripPlace[]
+
+  @@index([categoryId])
+  @@index([slug])
+  @@index([isFeatured])
+  @@map("places")
+}
+
+enum PriceLevel {
+  FREE
+  BUDGET      // $
+  MODERATE    // $$
+  EXPENSIVE   // $$$
+  LUXURY      // $$$$
+}
+
+// ============================================
+// REVIEWS & RATINGS
+// ============================================
+
+model Review {
+  id          String   @id @default(cuid())
+  rating      Int      // 1-5
+  title       String?
+  content     String
+  images      String[] @default([])
+  isVerified  Boolean  @default(false)
+  isApproved  Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  placeId     String
+  place       Place    @relation(fields: [placeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, placeId])
+  @@index([placeId])
+  @@index([userId])
+  @@map("reviews")
+}
+
+// ============================================
+// FAVORITES
+// ============================================
+
+model Favorite {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+
+  // Relations
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  placeId   String
+  place     Place    @relation(fields: [placeId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, placeId])
+  @@index([userId])
+  @@map("favorites")
+}
+
+// ============================================
+// TRIPS & ITINERARIES
+// ============================================
+
+model Trip {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  startDate   DateTime?
+  endDate     DateTime?
+  isPublic    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  places      TripPlace[]
+
+  @@index([userId])
+  @@map("trips")
+}
+
+model TripPlace {
+  id        String   @id @default(cuid())
+  order     Int      @default(0)
+  notes     String?
+  visitDate DateTime?
+  createdAt DateTime @default(now())
+
+  // Relations
+  tripId    String
+  trip      Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  placeId   String
+  place     Place    @relation(fields: [placeId], references: [id], onDelete: Cascade)
+
+  @@unique([tripId, placeId])
+  @@index([tripId])
+  @@map("trip_places")
+}
+
+// ============================================
+// SETTINGS & CONFIGURATION
+// ============================================
+
+model Setting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  type      String   @default("string") // string, number, boolean, json
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("settings")
+}
+
+// ============================================
+// REWARDS & GAMIFICATION
+// ============================================
+
+model UserXP {
+  id          String   @id @default(cuid())
+  userId      String   @unique
+  totalXp     Int      @default(0)
+  level       Int      @default(1)
+  points      Int      @default(0) // Redeemable points
+  visitCount  Int      @default(0)
+  tourCount   Int      @default(0)
+  reviewCount Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("user_xp")
+}
+
+model UserBadge {
+  id        String   @id @default(cuid())
+  userId    String
+  badgeId   String
+  earnedAt  DateTime @default(now())
+  xpAwarded Int      @default(0)
+
+  @@unique([userId, badgeId])
+  @@index([userId])
+  @@map("user_badges")
+}
+
+model PlaceVisit {
+  id        String   @id @default(cuid())
+  userId    String
+  placeId   String
+  visitedAt DateTime @default(now())
+  xpEarned  Int      @default(0)
+  
+  @@unique([userId, placeId, visitedAt])
+  @@index([userId])
+  @@index([placeId])
+  @@map("place_visits")
+}
+
+model TourCompletion {
+  id          String   @id @default(cuid())
+  userId      String
+  tourId      String
+  completedAt DateTime @default(now())
+  duration    Int?     // minutes taken
+  xpEarned    Int      @default(0)
+  badgeEarned String?
+
+  @@unique([userId, tourId])
+  @@index([userId])
+  @@map("tour_completions")
+}
+
+// ============================================
+// WALLET & REWARDS REDEMPTION
+// ============================================
+
+model RewardCode {
+  id          String   @id @default(cuid())
+  userId      String
+  code        String   @unique
+  partnerId   String
+  discount    String   // e.g., "15%", "20 SAR"
+  pointsCost  Int
+  status      RewardStatus @default(ACTIVE)
+  expiresAt   DateTime
+  redeemedAt  DateTime?
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
+  @@index([partnerId])
+  @@map("reward_codes")
+}
+
+enum RewardStatus {
+  ACTIVE
+  USED
+  EXPIRED
+}
+
+model Partner {
+  id          String   @id @default(cuid())
+  name        String
+  nameAr      String
+  logo        String?
+  category    String
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("partners")
+}
+
+// ============================================
+// EVENTS & SEASONS
+// ============================================
+
+model Event {
+  id          String   @id @default(cuid())
+  name        String
+  nameAr      String
+  description String
+  descriptionAr String?
+  image       String?
+  startDate   DateTime
+  endDate     DateTime
+  latitude    Float?
+  longitude   Float?
+  address     String?
+  category    EventCategory @default(ENTERTAINMENT)
+  price       EventPrice    @default(FREE)
+  priceRange  String?
+  website     String?
+  isActive    Boolean  @default(true)
+  tags        String[] @default([])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([startDate])
+  @@index([endDate])
+  @@map("events")
+}
+
+enum EventCategory {
+  RIYADH_SEASON
+  CULTURAL
+  SPORTS
+  ENTERTAINMENT
+  FOOD
+  MUSIC
+}
+
+enum EventPrice {
+  FREE
+  PAID
+}
+
+// ============================================
+// PRE-DEFINED TOURS
+// ============================================
+
+model GuidedTour {
+  id          String   @id @default(cuid())
+  name        String
+  nameAr      String
+  subtitle    String?
+  subtitleAr  String?
+  description String
+  descriptionAr String?
+  image       String?
+  gallery     String[] @default([])
+  categories  String[] @default([])
+  difficulty  TourDifficulty @default(EASY)
+  duration    Int      // minutes
+  distance    Float    // km
+  badgeId     String?
+  badgeXp     Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  waypoints   TourWaypoint[]
+
+  @@map("guided_tours")
+}
+
+enum TourDifficulty {
+  EASY
+  MODERATE
+  CHALLENGING
+}
+
+model TourWaypoint {
+  id          String   @id @default(cuid())
+  tourId      String
+  name        String
+  nameAr      String
+  description String
+  descriptionAr String?
+  latitude    Float
+  longitude   Float
+  order       Int
+  duration    Int      // minutes
+  activities  String[] @default([])
+  activitiesAr String[] @default([])
+  image       String?
+  createdAt   DateTime @default(now())
+
+  tour        GuidedTour @relation(fields: [tourId], references: [id], onDelete: Cascade)
+
+  @@index([tourId])
+  @@map("tour_waypoints")
+}
+
+// ============================================
+// PLACE TAGS (Dynamic Categories)
+// ============================================
+
+model PlaceTag {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  nameAr    String
+  icon      String?
+  color     String?
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+
+  places    PlaceTagAssignment[]
+
+  @@map("place_tags")
+}
+
+model PlaceTagAssignment {
+  id        String   @id @default(cuid())
+  placeId   String
+  tagId     String
+  createdAt DateTime @default(now())
+
+  tag       PlaceTag @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@unique([placeId, tagId])
+  @@index([placeId])
+  @@index([tagId])
+  @@map("place_tag_assignments")
+}
+
+// ============================================
+// CITIES MANAGEMENT
+// ============================================
+
+model City {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  nameAr      String
+  slug        String   @unique
+  description String?
+  descriptionAr String?
+  image       String?
+  latitude    Float?
+  longitude   Float?
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("cities")
+}
+
+// ============================================
+// USER REQUESTS & SERVICE TRACKING
+// ============================================
+
+model UserRequest {
+  id          String        @id @default(cuid())
+  userId      String
+  type        RequestType
+  status      RequestStatus @default(PENDING)
+  title       String
+  content     String
+  response    String?
+  priority    RequestPriority @default(NORMAL)
+  metadata    String?       // JSON for additional data
+  assignedTo  String?       // Admin/Moderator ID
+  resolvedAt  DateTime?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  @@index([userId])
+  @@index([type])
+  @@index([status])
+  @@index([createdAt])
+  @@map("user_requests")
+}
+
+enum RequestType {
+  AUDIO_GUIDE
+  TRIP_PLAN
+  INQUIRY
+  COMPLAINT
+  SUGGESTION
+  SUPPORT
+  BOOKING
+}
+
+enum RequestStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  REJECTED
+}
+
+enum RequestPriority {
+  LOW
+  NORMAL
+  HIGH
+  URGENT
+}
+
+// ============================================
+// ANNOUNCEMENTS & PROMOTIONS
+// ============================================
+
+model Announcement {
+  id          String   @id @default(cuid())
+  title       String
+  titleAr     String
+  content     String
+  contentAr   String
+  image       String?
+  type        AnnouncementType @default(GENERAL)
+  priority    Int      @default(0)
+  targetAudience String? // JSON: {"roles": ["USER"], "cities": ["riyadh"]}
+  isActive    Boolean  @default(true)
+  startDate   DateTime @default(now())
+  endDate     DateTime?
+  createdBy   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  readBy      AnnouncementRead[]
+
+  @@index([isActive])
+  @@index([startDate])
+  @@map("announcements")
+}
+
+enum AnnouncementType {
+  GENERAL
+  MAINTENANCE
+  UPDATE
+  ALERT
+  NEWS
+}
+
+model AnnouncementRead {
+  id             String   @id @default(cuid())
+  announcementId String
+  userId         String
+  readAt         DateTime @default(now())
+
+  announcement   Announcement @relation(fields: [announcementId], references: [id], onDelete: Cascade)
+
+  @@unique([announcementId, userId])
+  @@index([userId])
+  @@map("announcement_reads")
+}
+
+model Promotion {
+  id          String   @id @default(cuid())
+  title       String
+  titleAr     String
+  description String
+  descriptionAr String
+  image       String?
+  code        String?  @unique
+  discount    String?  // e.g., "20%", "50 SAR"
+  type        PromotionType @default(OFFER)
+  targetUrl   String?
+  isActive    Boolean  @default(true)
+  startDate   DateTime @default(now())
+  endDate     DateTime?
+  maxUses     Int?
+  usedCount   Int      @default(0)
+  createdBy   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([isActive])
+  @@index([startDate])
+  @@map("promotions")
+}
+
+enum PromotionType {
+  OFFER
+  DISCOUNT
+  DEAL
+  EXCLUSIVE
+}
+
+// ============================================
+// ACTIVITY LOGS & ANALYTICS
+// ============================================
+
+model ActivityLog {
+  id          String   @id @default(cuid())
+  userId      String?
+  action      String
+  entityType  String   // place, tour, event, etc.
+  entityId    String?
+  metadata    String?  // JSON for additional data
+  ipAddress   String?
+  userAgent   String?
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
+  @@index([action])
+  @@index([entityType])
+  @@index([createdAt])
+  @@map("activity_logs")
+}
+
+model PageView {
+  id          String   @id @default(cuid())
+  userId      String?
+  path        String
+  referrer    String?
+  sessionId   String?
+  duration    Int?     // seconds
+  createdAt   DateTime @default(now())
+
+  @@index([path])
+  @@index([userId])
+  @@index([createdAt])
+  @@map("page_views")
+}
+
+model SearchLog {
+  id          String   @id @default(cuid())
+  userId      String?
+  query       String
+  category    String?
+  resultsCount Int     @default(0)
+  clicked     String?  // ID of clicked result
+  createdAt   DateTime @default(now())
+
+  @@index([query])
+  @@index([createdAt])
+  @@map("search_logs")
+}
+
+// ============================================
+// USER PREFERENCES & NOTIFICATIONS
+// ============================================
+
+model UserPreference {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  language        String   @default("ar")
+  theme           String   @default("dark")
+  pushEnabled     Boolean  @default(true)
+  emailEnabled    Boolean  @default(true)
+  categories      String[] @default([])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("user_preferences")
+}
+
+model UserNotification {
+  id          String   @id @default(cuid())
+  userId      String
+  title       String
+  titleAr     String?
+  body        String
+  bodyAr      String?
+  type        NotificationType @default(INFO)
+  actionUrl   String?
+  isRead      Boolean  @default(false)
+  readAt      DateTime?
+  createdAt   DateTime @default(now())
+
+  @@index([userId])
+  @@index([isRead])
+  @@index([createdAt])
+  @@map("user_notifications")
+}
+
+enum NotificationType {
+  INFO
+  PROMOTION
+  ANNOUNCEMENT
+  REQUEST_UPDATE
+  REWARD
+  SYSTEM
+}
+
+// ============================================
+// PLACE OWNERSHIP & PARTNER PROFILES
+// ============================================
+
+model PlaceOwnership {
+  id          String   @id @default(cuid())
+  userId      String
+  placeId     String
+  role        String   @default("owner") // owner, manager
+  isVerified  Boolean  @default(false)
+  verifiedAt  DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, placeId])
+  @@index([userId])
+  @@index([placeId])
+  @@map("place_ownerships")
+}
+
+model PartnerProfile {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  companyName   String
+  companyNameAr String?
+  logo          String?
+  category      String
+  description   String?
+  descriptionAr String?
+  website       String?
+  phone         String?
+  address       String?
+  isActive      Boolean  @default(true)
+  isVerified    Boolean  @default(false)
+  verifiedAt    DateTime?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("partner_profiles")
+}
+
+// ============================================
+// KNOWLEDGE BASE (RAG System)
+// ============================================
+
+model KnowledgeDocument {
+  id          String   @id @default(cuid())
+  title       String
+  titleAr     String?
+  content     String   @db.Text
+  contentAr   String?  @db.Text
+  category    String
+  tags        String[] @default([])
+  source      String?
+  sourceUrl   String?
+  embedding   String?  @db.Text // JSON array of embedding vector
+  metadata    String?  @db.Text // JSON metadata
+  isActive    Boolean  @default(true)
+  createdBy   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([category])
+  @@index([isActive])
+  @@index([createdAt])
+  @@map("knowledge_documents")
+}
+
+// ============================================
+// AI CONVERSATION HISTORY
+// ============================================
+
+model AIConversation {
+  id          String   @id @default(cuid())
+  userId      String?
+  sessionId   String
+  type        AIConversationType @default(TOUR_GUIDE)
+  messages    AIMessage[]
+  metadata    String?  @db.Text // JSON metadata
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId])
+  @@index([sessionId])
+  @@index([type])
+  @@map("ai_conversations")
+}
+
+model AIMessage {
+  id             String   @id @default(cuid())
+  conversationId String
+  role           String   // user, assistant, system
+  content        String   @db.Text
+  metadata       String?  @db.Text // JSON metadata (e.g., location, place)
+  createdAt      DateTime @default(now())
+
+  conversation   AIConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId])
+  @@map("ai_messages")
+}
+
+enum AIConversationType {
+  TOUR_GUIDE
+  TRIP_PLANNER
+  AR_GUIDE
+  VR_HISTORY
+  RAG_QUERY
+}
+
+// ============================================
+// EXPERIENCE MARKETPLACE (Phase 9)
+// ============================================
+
+// Guide Profiles for Experience Marketplace
+model GuideProfile {
+  id                  String   @id @default(cuid())
+  userId              String   @unique
+  displayName         String
+  displayNameAr       String?
+  bio                 String
+  bioAr               String?
+  bioVector           String?  @db.Text // Vector embedding for AI matching
+  avatar              String?
+  coverImage          String?
+  
+  // Specializations
+  languages           String[] @default(["ar"])
+  specialties         String[] @default([])
+  certifications      String[] @default([])
+  certificationStatus CertificationStatus @default(PENDING)
+  
+  // Professional Info
+  yearsExperience     Int      @default(0)
+  hourlyRate          Int?     // SAR per hour
+  minimumDuration     Int      @default(60) // minutes
+  maximumGuests       Int      @default(10)
+  
+  // Ratings & Stats
+  rating              Float    @default(0)
+  totalReviews        Int      @default(0)
+  totalExperiences    Int      @default(0)
+  totalBookings       Int      @default(0)
+  responseTime        Int?     // average minutes
+  
+  // Verification
+  isVerified          Boolean  @default(false)
+  isActive            Boolean  @default(true)
+  isFeatured          Boolean  @default(false)
+  verifiedAt          DateTime?
+  
+  // Location preferences
+  serviceAreas        String[] @default([])
+  canTravel           Boolean  @default(true)
+  travelRadius        Int      @default(50) // km
+  
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  // Relations
+  experiences         Experience[]
+  bookings            Booking[]
+  guideReviews        GuideReview[]
+  availability        GuideAvailability[]
+
+  @@index([certificationStatus])
+  @@index([rating])
+  @@index([isActive])
+  @@map("guide_profiles")
+}
+
+enum CertificationStatus {
+  PENDING
+  UNDER_REVIEW
+  CERTIFIED
+  EXPIRED
+  REJECTED
+}
+
+// Guide Availability Slots
+model GuideAvailability {
+  id          String   @id @default(cuid())
+  guideId     String
+  dayOfWeek   Int      // 0-6 (Sunday-Saturday)
+  startTime   String   // HH:MM format
+  endTime     String   // HH:MM format
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+
+  guide       GuideProfile @relation(fields: [guideId], references: [id], onDelete: Cascade)
+
+  @@index([guideId])
+  @@map("guide_availability")
+}
+
+// Spaces/Venues for Experiences
+model SpaceInventory {
+  id              String   @id @default(cuid())
+  ownerId         String
+  name            String
+  nameAr          String?
+  description     String
+  descriptionAr   String?
+  
+  // Location
+  address         String
+  addressAr       String?
+  latitude        Float
+  longitude       Float
+  
+  // Capacity & Slots
+  capacity        Int      @default(20)
+  minCapacity     Int      @default(1)
+  hourlySlots     String[] @default([]) // Available time slots ["09:00-10:00", "10:00-11:00"]
+  
+  // Amenities
+  amenities       String[] @default([])
+  images          String[] @default([])
+  
+  // Venue Type
+  venueType       VenueType @default(INDOOR)
+  spaceCategory   String?
+  
+  // Pricing
+  hourlyRate      Int?     // SAR per hour
+  halfDayRate     Int?
+  fullDayRate     Int?
+  
+  // Status
+  isActive        Boolean  @default(true)
+  isVerified      Boolean  @default(false)
+  verifiedAt      DateTime?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  experiences     Experience[]
+  spaceBookings   SpaceBooking[]
+
+  @@index([ownerId])
+  @@index([venueType])
+  @@index([isActive])
+  @@map("space_inventory")
+}
+
+enum VenueType {
+  INDOOR
+  OUTDOOR
+  HYBRID
+  VIRTUAL
+}
+
+// Experiences (Core Marketplace Entity)
+model Experience {
+  id              String   @id @default(cuid())
+  guideId         String
+  spaceId         String?
+  
+  // Basic Info
+  title           String
+  titleAr         String?
+  subtitle        String?
+  subtitleAr      String?
+  description     String
+  descriptionAr   String?
+  
+  // Media
+  coverImage      String?
+  gallery         String[] @default([])
+  videoUrl        String?
+  
+  // Categorization
+  category        ExperienceCategory @default(CULTURAL)
+  subcategory     String?
+  tags            String[] @default([])
+  
+  // Duration & Capacity
+  dynamicDuration Boolean  @default(false) // Allows flexible duration
+  minDuration     Int      @default(60) // minutes
+  maxDuration     Int      @default(180) // minutes
+  minGuests       Int      @default(1)
+  maxGuests       Int      @default(10)
+  
+  // Pricing
+  pricingTier     PricingTier @default(STANDARD)
+  basePrice       Int      // SAR
+  pricePerPerson  Int?     // For group experiences
+  childPrice      Int?     // For family experiences
+  groupDiscount   Float?   // Percentage discount
+  
+  // Requirements
+  requirements    String[] @default([])
+  includedItems   String[] @default([])
+  excludedItems   String[] @default([])
+  languages       String[] @default(["ar", "en"])
+  
+  // Location
+  meetingPoint    String?
+  meetingPointAr  String?
+  latitude        Float?
+  longitude       Float?
+  
+  // Stats
+  rating          Float    @default(0)
+  totalReviews    Int      @default(0)
+  totalBookings   Int      @default(0)
+  viewCount       Int      @default(0)
+  
+  // Status
+  status          ExperienceStatus @default(DRAFT)
+  isActive        Boolean  @default(true)
+  isFeatured      Boolean  @default(false)
+  publishedAt     DateTime?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  guide           GuideProfile @relation(fields: [guideId], references: [id], onDelete: Cascade)
+  space           SpaceInventory? @relation(fields: [spaceId], references: [id])
+  bookings        Booking[]
+  experienceReviews ExperienceReview[]
+  experienceSlots ExperienceSlot[]
+
+  @@index([guideId])
+  @@index([spaceId])
+  @@index([category])
+  @@index([status])
+  @@index([rating])
+  @@map("experiences")
+}
+
+enum ExperienceCategory {
+  CULTURAL
+  CULINARY
+  ADVENTURE
+  WELLNESS
+  ART
+  HISTORY
+  NATURE
+  PHOTOGRAPHY
+  MUSIC
+  CRAFTS
+  SPORTS
+  EDUCATIONAL
+}
+
+enum PricingTier {
+  ECONOMY
+  STANDARD
+  PREMIUM
+  LUXURY
+}
+
+enum ExperienceStatus {
+  DRAFT
+  PENDING_REVIEW
+  APPROVED
+  REJECTED
+  PAUSED
+  ARCHIVED
+}
+
+// Experience Time Slots
+model ExperienceSlot {
+  id            String   @id @default(cuid())
+  experienceId  String
+  date          DateTime
+  startTime     String   // HH:MM
+  endTime       String   // HH:MM
+  spotsAvailable Int
+  price         Int?     // Override base price
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+
+  experience    Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+  bookings      Booking[]
+
+  @@index([experienceId])
+  @@index([date])
+  @@map("experience_slots")
+}
+
+// Bookings
+model Booking {
+  id              String   @id @default(cuid())
+  bookingNumber   String   @unique // REXP-2026-XXXXX
+  userId          String
+  guideId         String
+  experienceId    String
+  slotId          String?
+  
+  // Booking Details
+  date            DateTime
+  startTime       String
+  endTime         String
+  duration        Int      // minutes
+  guestCount      Int      @default(1)
+  
+  // Guests Info
+  guestDetails    String?  @db.Text // JSON: [{name, age, specialNeeds}]
+  specialRequests String?
+  
+  // Pricing
+  baseAmount      Int
+  discount        Int      @default(0)
+  serviceFee      Int      @default(0)
+  totalAmount     Int
+  currency        String   @default("SAR")
+  
+  // Payment
+  paymentStatus   PaymentStatus @default(PENDING)
+  paymentMethod   String?
+  paymentId       String?  // External payment reference
+  paidAt          DateTime?
+  
+  // Booking Status
+  status          BookingStatus @default(PENDING)
+  confirmedAt     DateTime?
+  cancelledAt     DateTime?
+  cancellationReason String?
+  refundAmount    Int?
+  
+  // Communication
+  messageThread   String?  @db.Text // JSON array of messages
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  // Relations
+  guide           GuideProfile @relation(fields: [guideId], references: [id])
+  experience      Experience @relation(fields: [experienceId], references: [id])
+  slot            ExperienceSlot? @relation(fields: [slotId], references: [id])
+
+  @@index([userId])
+  @@index([guideId])
+  @@index([experienceId])
+  @@index([status])
+  @@index([date])
+  @@map("bookings")
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  REFUNDED
+  PARTIALLY_REFUNDED
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+  NO_SHOW
+  DISPUTED
+}
+
+// Space Bookings (for venue rentals)
+model SpaceBooking {
+  id          String   @id @default(cuid())
+  spaceId     String
+  bookerId    String
+  date        DateTime
+  startTime   String
+  endTime     String
+  purpose     String?
+  guestCount  Int      @default(1)
+  totalAmount Int
+  status      BookingStatus @default(PENDING)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  space       SpaceInventory @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+
+  @@index([spaceId])
+  @@index([bookerId])
+  @@index([date])
+  @@map("space_bookings")
+}
+
+// Guide Reviews
+model GuideReview {
+  id          String   @id @default(cuid())
+  guideId     String
+  userId      String
+  bookingId   String?
+  rating      Int      // 1-5
+  title       String?
+  content     String
+  aspects     String?  // JSON: {knowledge: 5, communication: 4, punctuality: 5}
+  isVerified  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  guide       GuideProfile @relation(fields: [guideId], references: [id], onDelete: Cascade)
+
+  @@unique([guideId, userId, bookingId])
+  @@index([guideId])
+  @@map("guide_reviews")
+}
+
+// Experience Reviews
+model ExperienceReview {
+  id            String   @id @default(cuid())
+  experienceId  String
+  userId        String
+  bookingId     String?
+  rating        Int      // 1-5
+  title         String?
+  content       String
+  photos        String[] @default([])
+  isVerified    Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  experience    Experience @relation(fields: [experienceId], references: [id], onDelete: Cascade)
+
+  @@unique([experienceId, userId, bookingId])
+  @@index([experienceId])
+  @@map("experience_reviews")
+}
+
+// Commission Configuration
+model CommissionConfig {
+  id              String   @id @default(cuid())
+  name            String   @unique
+  description     String?
+  
+  // Commission Rates
+  transactionFee  Float    @default(0.15) // 15% default
+  minimumFee      Int      @default(10)   // SAR
+  maximumFee      Int?     // Optional cap
+  
+  // Tier-based rates
+  economyRate     Float    @default(0.12) // 12%
+  standardRate    Float    @default(0.15) // 15%
+  premiumRate     Float    @default(0.18) // 18%
+  luxuryRate      Float    @default(0.20) // 20%
+  
+  // Guide-specific overrides
+  newGuideRate    Float    @default(0.20) // Higher for new guides
+  verifiedRate    Float    @default(0.12) // Lower for verified
+  
+  // Status
+  isActive        Boolean  @default(true)
+  effectiveFrom   DateTime @default(now())
+  effectiveUntil  DateTime?
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("commission_config")
+}
+
+// AI Trip Builder Agent
+model TripBuilderSession {
+  id              String   @id @default(cuid())
+  userId          String?
+  sessionId       String   @unique
+  
+  // User Intent
+  intent          String?  @db.Text // Natural language intent
+  preferences     String?  @db.Text // JSON preferences
+  
+  // Generated Itinerary
+  itinerary       String?  @db.Text // JSON itinerary
+  experiences     String[] @default([]) // Selected experience IDs
+  
+  // Status
+  status          TripBuilderStatus @default(COLLECTING_PREFERENCES)
+  
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([userId])
+  @@map("trip_builder_sessions")
+}
+
+enum TripBuilderStatus {
+  COLLECTING_PREFERENCES
+  GENERATING
+  READY
+  BOOKED
+  EXPIRED
+}
+
+// ============================================
+// AUDIO TOURS MANAGEMENT
+// ============================================
+
+model AudioTour {
+  id            String   @id @default(cuid())
+  title         String
+  titleAr       String
+  description   String   @db.Text
+  descriptionAr String   @db.Text
+  image         String?
+  gallery       String[] @default([])
+  
+  // Tour Details
+  duration      Int      // minutes
+  distance      Float?   // km
+  difficulty    TourDifficulty @default(EASY)
+  category      AudioTourCategory @default(HISTORICAL)
+  
+  // Rating & Stats
+  rating        Float    @default(0)
+  reviewCount   Int      @default(0)
+  playCount     Int      @default(0)
+  
+  // Status
+  isActive      Boolean  @default(true)
+  isFeatured    Boolean  @default(false)
+  
+  // Pricing
+  isFree        Boolean  @default(true)
+  price         Int?     // SAR
+  
+  // Audio
+  audioUrl      String?
+  audioUrlAr    String?
+  
+  // Location
+  latitude      Float?
+  longitude     Float?
+  city          String   @default("riyadh")
+  
+  // Metadata
+  createdBy     String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relations
+  stops         AudioTourStop[]
+
+  @@index([category])
+  @@index([isActive])
+  @@index([isFeatured])
+  @@index([city])
+  @@map("audio_tours")
+}
+
+model AudioTourStop {
+  id            String   @id @default(cuid())
+  tourId        String
+  order         Int      @default(0)
+  
+  name          String
+  nameAr        String
+  description   String   @db.Text
+  descriptionAr String   @db.Text
+  
+  // Location
+  latitude      Float
+  longitude     Float
+  
+  // Media
+  image         String?
+  audioUrl      String?
+  audioUrlAr    String?
+  
+  // Duration
+  duration      Int      @default(5) // minutes
+  
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  tour          AudioTour @relation(fields: [tourId], references: [id], onDelete: Cascade)
+
+  @@index([tourId])
+  @@index([order])
+  @@map("audio_tour_stops")
+}
+
+enum AudioTourCategory {
+  HISTORICAL
+  CULTURAL
+  MODERN
+  NATURE
+  RELIGIOUS
+  SHOPPING
+  FOOD
+}

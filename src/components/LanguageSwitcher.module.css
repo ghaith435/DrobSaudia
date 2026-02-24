@@ -1,0 +1,32 @@
+.switcher {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.3s var(--ease-smooth);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.switcher:hover {
+    border-color: var(--accent-gold);
+    background: rgba(217, 176, 99, 0.1);
+}
+
+.icon {
+    font-size: 1rem;
+}
+
+.label {
+    font-family: 'Tajawal', 'Outfit', sans-serif;
+}
+
+/* RTL Support */
+[dir="rtl"] .switcher {
+    flex-direction: row-reverse;
+}

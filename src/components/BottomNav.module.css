@@ -1,0 +1,84 @@
+.bottomNav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid var(--glass-border);
+    padding: 0.5rem 0.5rem calc(0.5rem + env(safe-area-inset-bottom, 0px));
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -2px 16px rgba(0, 0, 0, 0.05);
+}
+
+@media (max-width: 768px) {
+    .bottomNav {
+        display: flex;
+    }
+}
+
+.navItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.2rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 1rem;
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: all 0.3s var(--ease-smooth);
+    position: relative;
+    min-width: 56px;
+}
+
+.navItem:active {
+    transform: scale(0.92);
+}
+
+.navItemActive {
+    color: var(--accent-gold);
+}
+
+.navIcon {
+    font-size: 1.3rem;
+    line-height: 1;
+    transition: transform 0.3s var(--ease-spring);
+}
+
+.navItemActive .navIcon {
+    transform: translateY(-2px) scale(1.15);
+}
+
+.navLabel {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    white-space: nowrap;
+}
+
+.activeIndicator {
+    position: absolute;
+    top: -1px;
+    width: 20px;
+    height: 3px;
+    background: var(--accent-gold);
+    border-radius: 0 0 4px 4px;
+    animation: indicatorIn 0.3s var(--ease-spring);
+}
+
+@keyframes indicatorIn {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+
+    to {
+        width: 20px;
+        opacity: 1;
+    }
+}
