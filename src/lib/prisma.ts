@@ -10,6 +10,12 @@ function createPrismaClient() {
     const connectionString = process.env.DATABASE_URL;
 
     if (!connectionString) {
+        // During build time (static generation), DATABASE_URL may not be set.
+        // API routes will still fail at runtime if DB is not configured.
+        if (process.env.NEXT_PHASE === 'phase-production-build') {
+            console.warn('⚠️  DATABASE_URL not set during build - skipping DB connection');
+            return null as unknown as PrismaClient;
+        }
         throw new Error('DATABASE_URL environment variable is not set');
     }
 
