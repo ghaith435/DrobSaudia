@@ -6,42 +6,42 @@ const categories = [
         id: 'history',
         name: 'Historical & Heritage',
         description: 'Discover the rich history of Saudi Arabia',
-        image: 'https://picsum.photos/seed/history/800/600',
+        image: 'https://images.unsplash.com/photo-1609605988964-d54b3e834041?w=800&h=600&fit=crop',
         count: 12
     },
     {
         id: 'modern',
         name: 'Modern Luxury',
         description: 'Experience world-class architecture and lifestyle',
-        image: 'https://picsum.photos/seed/modern/800/600',
+        image: 'https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6?w=800&h=600&fit=crop',
         count: 8
     },
     {
         id: 'shopping',
         name: 'Shopping',
         description: 'From traditional souks to luxury malls',
-        image: 'https://picsum.photos/seed/shopping/800/600',
+        image: 'https://images.unsplash.com/photo-1567449303078-57ad995bd329?w=800&h=600&fit=crop',
         count: 15
     },
     {
         id: 'dining',
         name: 'Dining & Cuisine',
         description: 'Taste authentic Saudi and international flavors',
-        image: 'https://picsum.photos/seed/dining/800/600',
+        image: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&h=600&fit=crop',
         count: 20
     },
     {
         id: 'entertainment',
         name: 'Entertainment',
         description: 'Events, festivals, and attractions',
-        image: 'https://picsum.photos/seed/entertainment/800/600',
+        image: 'https://images.unsplash.com/photo-1682695797221-8164ff1fafc9?w=800&h=600&fit=crop',
         count: 10
     },
     {
         id: 'nature',
         name: 'Nature & Parks',
         description: 'Green spaces and natural escapes in the city',
-        image: 'https://picsum.photos/seed/nature/800/600',
+        image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&h=600&fit=crop',
         count: 6
     },
 ];

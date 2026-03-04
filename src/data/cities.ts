@@ -48,7 +48,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'حي الطريف',
                 description: 'UNESCO World Heritage site, birthplace of the Saudi state',
                 descriptionAr: 'موقع تراث عالمي لليونسكو، مهد الدولة السعودية',
-                image: 'https://images.unsplash.com/photo-1578895101408-1a36b834405b?w=800',
+                image: 'https://images.unsplash.com/photo-1609605988964-d54b3e834041?w=800',
                 category: 'Heritage',
                 rating: 4.9
             },
@@ -58,7 +58,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'بوليفارد رياض سيتي',
                 description: 'Premium entertainment destination with world-class attractions',
                 descriptionAr: 'وجهة ترفيهية متميزة مع معالم جذب عالمية',
-                image: 'https://images.unsplash.com/photo-1578895101408-1a36b834405b?w=800',
+                image: 'https://images.unsplash.com/photo-1682695797221-8164ff1fafc9?w=800',
                 category: 'Entertainment',
                 rating: 4.7
             },
@@ -68,7 +68,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'المتحف الوطني',
                 description: 'Premier museum showcasing Saudi Arabian history and culture',
                 descriptionAr: 'المتحف الرائد الذي يعرض تاريخ وثقافة المملكة العربية السعودية',
-                image: 'https://images.unsplash.com/photo-1578895101408-1a36b834405b?w=800',
+                image: 'https://images.unsplash.com/photo-1609605988964-d54b3e834041?w=800',
                 category: 'Culture',
                 rating: 4.6
             }
@@ -90,7 +90,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'حي البلد التاريخي',
                 description: 'UNESCO World Heritage site with traditional Hijazi architecture',
                 descriptionAr: 'موقع تراث عالمي لليونسكو بعمارة حجازية تقليدية',
-                image: 'https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=800',
+                image: 'https://images.unsplash.com/photo-1578895101408-1a36b834405b?w=800',
                 category: 'Heritage',
                 rating: 4.8
             },
@@ -100,7 +100,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'كورنيش جدة',
                 description: 'Beautiful 30km waterfront promenade along the Red Sea',
                 descriptionAr: 'كورنيش جميل بطول 30 كم على ساحل البحر الأحمر',
-                image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800',
+                image: 'https://images.unsplash.com/photo-1573790387438-4da905039392?w=800',
                 category: 'Nature',
                 rating: 4.7
             },
@@ -110,7 +110,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'نافورة الملك فهد',
                 description: 'World\'s tallest fountain shooting water up to 312 meters',
                 descriptionAr: 'أطول نافورة في العالم تضخ المياه حتى 312 متراً',
-                image: 'https://images.unsplash.com/photo-1473181488821-2d23949a045a?w=800',
+                image: 'https://images.unsplash.com/photo-1574236170878-f66e35f83207?w=800',
                 category: 'Landmark',
                 rating: 4.9
             },
@@ -120,7 +120,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'رد سي مول',
                 description: 'Premium shopping destination with international brands',
                 descriptionAr: 'وجهة تسوق راقية مع علامات تجارية عالمية',
-                image: 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=800',
+                image: 'https://images.unsplash.com/photo-1567449303078-57ad995bd329?w=800',
                 category: 'Shopping',
                 rating: 4.5
             }
@@ -130,7 +130,7 @@ export const CITIES_DATA: City[] = [
         id: 'mecca',
         name: 'Mecca',
         nameAr: 'مكة المكرمة',
-        backgroundImage: 'https://images.unsplash.com/photo-1580418827493-f2b22c0a76cb?w=1920',
+        backgroundImage: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=1920',
         description: 'The holiest city in Islam, home to the Masjid al-Haram and the Kaaba',
         descriptionAr: 'أقدس مدينة في الإسلام، موطن المسجد الحرام والكعبة المشرفة',
         highlights: ['Masjid al-Haram', 'Abraj Al-Bait', 'Jabal al-Nour', 'Mina'],
@@ -142,7 +142,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'المسجد الحرام',
                 description: 'The largest mosque and holiest site in Islam',
                 descriptionAr: 'أكبر مسجد وأقدس موقع في الإسلام',
-                image: 'https://images.unsplash.com/photo-1580418827493-f2b22c0a76cb?w=800',
+                image: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=800',
                 category: 'Religious',
                 rating: 5.0
             },
@@ -162,7 +162,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'جبل النور',
                 description: 'Mountain containing the Cave of Hira where Prophet Muhammad received his first revelation',
                 descriptionAr: 'الجبل الذي يحتوي على غار حراء حيث تلقى النبي محمد أول الوحي',
-                image: 'https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800',
+                image: 'https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=800',
                 category: 'Religious',
                 rating: 4.8
             },
@@ -172,7 +172,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'متحف مكة المكرمة',
                 description: 'Museum showcasing the history and heritage of the holy city',
                 descriptionAr: 'متحف يعرض تاريخ وتراث المدينة المقدسة',
-                image: 'https://images.unsplash.com/photo-1580418827493-f2b22c0a76cb?w=800',
+                image: 'https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800',
                 category: 'Culture',
                 rating: 4.5
             }
@@ -182,7 +182,7 @@ export const CITIES_DATA: City[] = [
         id: 'medina',
         name: 'Medina',
         nameAr: 'المدينة المنورة',
-        backgroundImage: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=1920',
+        backgroundImage: 'https://images.unsplash.com/photo-1590076084186-2432b421c5a8?w=1920',
         description: 'The second holiest city in Islam, home to the Prophet\'s Mosque',
         descriptionAr: 'ثاني أقدس مدينة في الإسلام، موطن المسجد النبوي الشريف',
         highlights: ['Prophet\'s Mosque', 'Quba Mosque', 'Uhud Mountain', 'Date Farms'],
@@ -194,7 +194,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'المسجد النبوي',
                 description: 'The Prophet\'s Mosque, second holiest site in Islam',
                 descriptionAr: 'المسجد النبوي الشريف، ثاني أقدس موقع في الإسلام',
-                image: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=800',
+                image: 'https://images.unsplash.com/photo-1590076084186-2432b421c5a8?w=800',
                 category: 'Religious',
                 rating: 5.0
             },
@@ -204,7 +204,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'مسجد قباء',
                 description: 'The first mosque built in Islamic history',
                 descriptionAr: 'أول مسجد بني في تاريخ الإسلام',
-                image: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=800',
+                image: 'https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=800',
                 category: 'Religious',
                 rating: 4.9
             },
@@ -214,7 +214,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'جبل أحد',
                 description: 'Historic mountain where the Battle of Uhud took place',
                 descriptionAr: 'الجبل التاريخي الذي دارت فيه غزوة أحد',
-                image: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=800',
+                image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800',
                 category: 'Historical',
                 rating: 4.7
             },
@@ -224,7 +224,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'النور مول',
                 description: 'Modern shopping center near the Prophet\'s Mosque',
                 descriptionAr: 'مركز تسوق حديث قريب من المسجد النبوي',
-                image: 'https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?w=800',
+                image: 'https://images.unsplash.com/photo-1567449303078-57ad995bd329?w=800',
                 category: 'Shopping',
                 rating: 4.4
             }
@@ -246,7 +246,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'كورنيش الدمام',
                 description: 'Beautiful waterfront promenade with parks and restaurants',
                 descriptionAr: 'كورنيش جميل على البحر مع حدائق ومطاعم',
-                image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800',
+                image: 'https://images.unsplash.com/photo-1573790387438-4da905039392?w=800',
                 category: 'Nature',
                 rating: 4.6
             },
@@ -256,7 +256,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'حديقة الملك فهد',
                 description: 'Large public park with lakes, gardens, and entertainment',
                 descriptionAr: 'حديقة عامة كبيرة مع بحيرات وحدائق وترفيه',
-                image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800',
+                image: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800',
                 category: 'Nature',
                 rating: 4.5
             },
@@ -266,7 +266,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'قلعة تاروت',
                 description: 'Ancient fortress on Tarout Island with 5000 years of history',
                 descriptionAr: 'قلعة قديمة في جزيرة تاروت بتاريخ يمتد لـ 5000 عام',
-                image: 'https://images.unsplash.com/photo-1564769625905-50e93615e769?w=800',
+                image: 'https://images.unsplash.com/photo-1609605988964-d54b3e834041?w=800',
                 category: 'Heritage',
                 rating: 4.7
             },
@@ -276,7 +276,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'الظهران مول',
                 description: 'Premium shopping destination in the Eastern Province',
                 descriptionAr: 'وجهة تسوق راقية في المنطقة الشرقية',
-                image: 'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=800',
+                image: 'https://images.unsplash.com/photo-1567449303078-57ad995bd329?w=800',
                 category: 'Shopping',
                 rating: 4.4
             }
@@ -308,7 +308,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'صخرة الفيل',
                 description: 'Iconic natural rock formation shaped like an elephant',
                 descriptionAr: 'تشكيل صخري طبيعي مميز على شكل فيل',
-                image: 'https://images.unsplash.com/photo-1682687982501-1e58ab814714?w=800',
+                image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800',
                 category: 'Nature',
                 rating: 4.8
             },
@@ -318,7 +318,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'البلدة القديمة بالعلا',
                 description: 'Ancient labyrinthine town with 900+ mud-brick houses',
                 descriptionAr: 'بلدة قديمة متاهية تضم أكثر من 900 منزل طيني',
-                image: 'https://images.unsplash.com/photo-1682687982501-1e58ab814714?w=800',
+                image: 'https://images.unsplash.com/photo-1547981609-4b6bfe67ca0b?w=800',
                 category: 'Heritage',
                 rating: 4.7
             },
@@ -328,7 +328,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'قاعة مرايا للحفلات',
                 description: 'World\'s largest mirrored building hosting international events',
                 descriptionAr: 'أكبر مبنى مرايا في العالم يستضيف فعاليات دولية',
-                image: 'https://images.unsplash.com/photo-1682687982501-1e58ab814714?w=800',
+                image: 'https://images.unsplash.com/photo-1682695797221-8164ff1fafc9?w=800',
                 category: 'Entertainment',
                 rating: 4.9
             }
@@ -338,7 +338,7 @@ export const CITIES_DATA: City[] = [
         id: 'abha',
         name: 'Abha',
         nameAr: 'أبها',
-        backgroundImage: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1920',
+        backgroundImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920',
         description: 'The city of fog, a mountainous resort city known for its cool climate and scenic beauty',
         descriptionAr: 'مدينة الضباب، مدينة جبلية سياحية معروفة بمناخها البارد وجمالها الخلاب',
         highlights: ['Asir National Park', 'Cable Car', 'Green Mountain', 'Habala Village'],
@@ -380,7 +380,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'قرية رجال ألمع',
                 description: 'UNESCO-listed heritage village with colorful traditional houses',
                 descriptionAr: 'قرية تراثية مسجلة باليونسكو مع منازل تقليدية ملونة',
-                image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800',
+                image: 'https://images.unsplash.com/photo-1542816417-0983c9c9ad53?w=800',
                 category: 'Heritage',
                 rating: 4.8
             }
@@ -402,7 +402,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'قصر شبرا',
                 description: 'Historic palace showcasing traditional Hijazi and Ottoman architecture',
                 descriptionAr: 'قصر تاريخي يعرض العمارة الحجازية والعثمانية التقليدية',
-                image: 'https://images.unsplash.com/photo-1578895101408-1a36b834405b?w=800',
+                image: 'https://images.unsplash.com/photo-1609605988964-d54b3e834041?w=800',
                 category: 'Heritage',
                 rating: 4.6
             },
