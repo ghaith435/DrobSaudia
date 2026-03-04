@@ -24,15 +24,22 @@
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: 800;
-    letter-spacing: -0.05em;
+    display: flex;
+    align-items: center;
     text-decoration: none;
-    color: var(--text-primary);
+    flex-shrink: 0;
 }
 
-.logoGold {
-    color: var(--accent-gold);
+.logoImage {
+    height: 65px;
+    width: auto;
+    object-fit: contain;
+    max-width: 250px;
+    transition: opacity 0.2s ease;
+}
+
+.logo:hover .logoImage {
+    opacity: 0.85;
 }
 
 .menuToggle {

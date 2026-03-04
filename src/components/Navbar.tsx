@@ -116,8 +116,16 @@ export default function Navbar() {
             <div className={styles.container}>
                 {/* Logo */}
                 <Link href="/" className={styles.logo}>
-                    {locale === 'ar' ? 'دليل' : 'Saudi'}
-                    <span className={styles.logoGold}>{locale === 'ar' ? 'السعودية' : 'Guide'}</span>
+                    <Image
+                        src="/logo_duroob.png"
+                        alt="شعار دروب"
+                        width={200}
+                        height={65}
+                        className={styles.logoImage}
+                        priority
+                        quality={100}
+                        unoptimized={true}
+                    />
                 </Link>
 
                 {/* City Selector */}
