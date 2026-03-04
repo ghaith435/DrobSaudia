@@ -58,7 +58,7 @@ export const CITIES_DATA: City[] = [
                 nameAr: 'بوليفارد رياض سيتي',
                 description: 'Premium entertainment destination with world-class attractions',
                 descriptionAr: 'وجهة ترفيهية متميزة مع معالم جذب عالمية',
-                image: 'https://images.unsplash.com/photo-1682695797221-8164ff1fafc9?w=800',
+                image: 'https://www.al-madina.com/uploads/images/2021/11/23/1971582.jpeg',
                 category: 'Entertainment',
                 rating: 4.7
             },

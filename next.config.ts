@@ -26,6 +26,11 @@ const nextConfig: NextConfig = {
         hostname: 'res.cloudinary.com',
         pathname: '/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.al-madina.com',
+        pathname: '/**',
+      },
     ],
   },
   // Output standalone for Railway deployment
