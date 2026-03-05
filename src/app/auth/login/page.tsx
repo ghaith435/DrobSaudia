@@ -4,6 +4,7 @@ import { useState, useEffect, Suspense } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./login.module.css";
 
 function LoginForm() {
@@ -120,12 +121,15 @@ function LoginForm() {
 
                 <div className={styles.header}>
                     <div className={styles.logoContainer}>
-                        <span className={styles.logoIcon}>🕌</span>
+                        <Image
+                            src="/logo_duroob.png"
+                            alt="Duroob Logo"
+                            width={120}
+                            height={120}
+                            className={styles.logoImage}
+                            priority
+                        />
                     </div>
-                    <h1 className={styles.logo}>
-                        <span className={styles.logoGold}>{isRTL ? 'دليل' : 'Riyadh'}</span>
-                        {isRTL ? ' الرياض' : ' Guide'}
-                    </h1>
                     <h2 className={styles.welcome}>{labels.welcome}</h2>
                     <p className={styles.subtitle}>{labels.subtitle}</p>
                 </div>
@@ -219,12 +223,15 @@ function LoginLoading() {
             <div className={styles.card}>
                 <div className={styles.header}>
                     <div className={styles.logoContainer}>
-                        <span className={styles.logoIcon}>🕌</span>
+                        <Image
+                            src="/logo_duroob.png"
+                            alt="Duroob Logo"
+                            width={120}
+                            height={120}
+                            className={styles.logoImage}
+                            priority
+                        />
                     </div>
-                    <h1 className={styles.logo}>
-                        <span className={styles.logoGold}>دليل</span>
-                        {' الرياض'}
-                    </h1>
                     <p style={{ color: '#999', marginTop: '1rem' }}>جاري التحميل...</p>
                 </div>
             </div>
