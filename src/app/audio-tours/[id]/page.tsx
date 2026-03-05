@@ -5,6 +5,18 @@ import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
 import { toursData, AudioTour, AudioStop } from '../data';
 import styles from './tour-details.module.css';
+import { useBackgroundMusic, type MusicMood } from '@/hooks/useBackgroundMusic';
+
+// Map tour category to music mood
+function getCategoryMood(category: string): MusicMood {
+    const cat = category.toLowerCase();
+    if (cat === 'religious') return 'none'; // Sacred sites - no music
+    if (cat === 'historical' || cat === 'heritage') return 'heritage';
+    if (cat === 'modern') return 'modern';
+    if (cat === 'nature') return 'nature';
+    if (cat === 'cultural') return 'cultural';
+    return 'heritage'; // default
+}
 
 export default function TourDetailsPage() {
     const params = useParams();
@@ -21,6 +33,7 @@ export default function TourDetailsPage() {
     const [aiScripts, setAiScripts] = useState<Record<string, string>>({});
     const [isGeneratingScript, setIsGeneratingScript] = useState(false);
     const audioRef = useRef<HTMLAudioElement | null>(null);
+    const bgMusic = useBackgroundMusic();
 
     useEffect(() => {
         const savedLocale = localStorage.getItem('locale') as 'ar' | 'en';
@@ -51,12 +64,28 @@ export default function TourDetailsPage() {
             setIsPlaying(true);
             setDuration(formatTime(durationSec));
 
+            // Start background music + duck for narration
+            if (tour) {
+                const mood = getCategoryMood(tour.category);
+                if (mood !== 'none') {
+                    if (!bgMusic.isPlaying) {
+                        bgMusic.startMusic({ mood, baseVolume: 0.25, duckedVolume: 0.08, fadeDuration: 2 });
+                    }
+                    bgMusic.duckVolume();
+                }
+            }
+
             const progressInterval = setInterval(() => {
                 currentProgress += step;
                 if (currentProgress >= 100) {
                     currentProgress = 100;
                     clearInterval(progressInterval);
                     handleTrackEnded();
+                    // Restore music volume between tracks
+                    if (tour) {
+                        const mood = getCategoryMood(tour.category);
+                        if (mood !== 'none') bgMusic.restoreVolume();
+                    }
                     return;
                 }
 
@@ -195,6 +224,8 @@ export default function TourDetailsPage() {
                 window.speechSynthesis.cancel();
                 if ((window as any).ttsInterval) clearInterval((window as any).ttsInterval);
             }
+            // Stop background music when leaving
+            bgMusic.stopMusic();
         };
     }, []);
 
@@ -508,6 +539,46 @@ export default function TourDetailsPage() {
                                             ⏭️
                                         </button>
                                     </div>
+
+                                    {/* Background Music Toggle */}
+                                    {tour && getCategoryMood(tour.category) !== 'none' && (
+                                        <div style={{
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            justifyContent: 'center',
+                                            gap: '12px',
+                                            marginTop: '12px',
+                                            padding: '10px 14px',
+                                            background: 'rgba(255, 165, 0, 0.08)',
+                                            borderRadius: '12px',
+                                            border: '1px solid rgba(255, 165, 0, 0.15)'
+                                        }}>
+                                            <button
+                                                onClick={bgMusic.toggleMute}
+                                                style={{
+                                                    background: 'none',
+                                                    border: 'none',
+                                                    fontSize: '1.2rem',
+                                                    cursor: 'pointer',
+                                                    opacity: bgMusic.isMuted ? 0.5 : 1
+                                                }}
+                                                title={isRTL ? 'موسيقى خلفية' : 'Background Music'}
+                                            >
+                                                {bgMusic.isMuted ? '🔇' : '🎵'}
+                                            </button>
+                                            <span style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.5)' }}>
+                                                {isRTL ? 'موسيقى خلفية' : 'Background Music'}
+                                            </span>
+                                            <input
+                                                type="range"
+                                                min="0"
+                                                max="100"
+                                                value={bgMusic.volume * 100}
+                                                onChange={(e) => bgMusic.setVolume(Number(e.target.value) / 100)}
+                                                style={{ flex: 1, height: '4px', accentColor: '#ffa500' }}
+                                            />
+                                        </div>
+                                    )}
                                 </>
                             ) : (
                                 <div className={styles.emptyPlayer}>

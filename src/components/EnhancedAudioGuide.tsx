@@ -8,12 +8,14 @@
  * - AI-generated + Manual content
  * - TTS with professional recording fallback
  * - VR integration for camera-based audio
+ * - Background music with volume ducking
  */
 
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import styles from "./enhanced-audio-guide.module.css";
+import { useBackgroundMusic, type MusicMood } from "@/hooks/useBackgroundMusic";
 
 type ContentStyle = 'documentary' | 'narrative' | 'combined';
 type ContentSource = 'ai_generated' | 'manual' | 'tourism_authority';
@@ -60,6 +62,8 @@ interface EnhancedAudioGuideProps {
     showSubTours?: boolean;
     showVROption?: boolean;
     onVRRequest?: () => void;
+    /** Background music mood. Set to 'none' for sacred sites */
+    musicMood?: MusicMood;
 }
 
 const LANGUAGES = [
@@ -84,7 +88,8 @@ export default function EnhancedAudioGuide({
     placeNameAr,
     showSubTours = true,
     showVROption = true,
-    onVRRequest
+    onVRRequest,
+    musicMood = 'heritage'
 }: EnhancedAudioGuideProps) {
     const [language, setLanguage] = useState("ar");
     const [style, setStyle] = useState<ContentStyle>("combined");
@@ -101,6 +106,10 @@ export default function EnhancedAudioGuide({
 
     const speechRef = useRef<SpeechSynthesisUtterance | null>(null);
     const audioRef = useRef<HTMLAudioElement | null>(null);
+
+    // Background music
+    const bgMusic = useBackgroundMusic();
+    const hasMusicSupport = musicMood !== 'none';
 
     const isArabic = language === "ar";
 
@@ -154,10 +163,12 @@ export default function EnhancedAudioGuide({
             audioRef.current.onplay = () => {
                 setIsPlaying(true);
                 setAudioSource('professional');
+                if (hasMusicSupport) bgMusic.duckVolume();
             };
             audioRef.current.onended = () => {
                 setIsPlaying(false);
                 setProgress(100);
+                if (hasMusicSupport) bgMusic.restoreVolume();
             };
             audioRef.current.ontimeupdate = () => {
                 if (audioRef.current) {
@@ -196,11 +207,13 @@ export default function EnhancedAudioGuide({
             setIsPlaying(true);
             setIsPaused(false);
             setAudioSource('tts');
+            if (hasMusicSupport) bgMusic.duckVolume();
         };
         utterance.onend = () => {
             setIsPlaying(false);
             setIsPaused(false);
             setProgress(100);
+            if (hasMusicSupport) bgMusic.restoreVolume();
         };
         utterance.onpause = () => setIsPaused(true);
         utterance.onresume = () => setIsPaused(false);
@@ -276,6 +289,11 @@ export default function EnhancedAudioGuide({
 
     // Start playing
     const startPlaying = async () => {
+        // Start background music if supported
+        if (hasMusicSupport && !bgMusic.isPlaying) {
+            bgMusic.startMusic({ mood: musicMood, baseVolume: 0.25, duckedVolume: 0.08, fadeDuration: 2 });
+        }
+
         const data = await fetchAudioGuide();
         if (!data) return;
 
@@ -319,6 +337,10 @@ export default function EnhancedAudioGuide({
         setIsPlaying(false);
         setIsPaused(false);
         setProgress(0);
+        // Stop background music
+        if (hasMusicSupport && bgMusic.isPlaying) {
+            bgMusic.stopMusic();
+        }
     };
 
     // Play sub-tour
@@ -498,6 +520,16 @@ export default function EnhancedAudioGuide({
                     </button>
                 )}
 
+                {hasMusicSupport && (
+                    <button
+                        className={`${styles.musicBtn} ${bgMusic.isMuted ? styles.muted : ''}`}
+                        onClick={bgMusic.toggleMute}
+                        title={isArabic ? 'موسيقى خلفية' : 'Background Music'}
+                    >
+                        {bgMusic.isMuted ? '🔇' : '🎵'}
+                    </button>
+                )}
+
                 {showVROption && (
                     <button className={styles.vrBtn} onClick={onVRRequest}>
                         📷 {isArabic ? "VR" : "VR"}
@@ -540,6 +572,24 @@ export default function EnhancedAudioGuide({
                 </div>
             )}
 
+            {/* Background Music Volume Control */}
+            {hasMusicSupport && bgMusic.isPlaying && (
+                <div className={styles.musicControl}>
+                    <span className={styles.musicLabel}>
+                        🎵 {isArabic ? 'موسيقى خلفية' : 'Background Music'}
+                    </span>
+                    <input
+                        type="range"
+                        min="0"
+                        max="100"
+                        value={bgMusic.volume * 100}
+                        onChange={(e) => bgMusic.setVolume(Number(e.target.value) / 100)}
+                        className={styles.volumeSlider}
+                    />
+                    <span className={styles.volumeValue}>{Math.round(bgMusic.volume * 100)}%</span>
+                </div>
+            )}
+
             {/* Features */}
             <div className={styles.features}>
                 <div className={styles.feature}>
@@ -554,6 +604,12 @@ export default function EnhancedAudioGuide({
                     <span>🌍</span>
                     <span>{isArabic ? "5 لغات" : "5 Languages"}</span>
                 </div>
+                {hasMusicSupport && (
+                    <div className={styles.feature}>
+                        <span>🎵</span>
+                        <span>{isArabic ? "موسيقى خلفية" : "Background Music"}</span>
+                    </div>
+                )}
                 <div className={styles.feature}>
                     <span>🎙️</span>
                     <span>{isArabic ? "صوت احترافي" : "Pro Audio"}</span>
